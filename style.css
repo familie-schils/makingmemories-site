@@ -1,0 +1,114 @@
+@font-face{font-family:"Lora";src:url("fonts/lora.woff") format("woff");font-weight:400 700;font-style:normal;font-display:swap}
+@font-face{font-family:"Lora";src:url("fonts/lora-italic.woff") format("woff");font-weight:400 700;font-style:italic;font-display:swap}
+
+:root{
+  --paper:#eef3ec;      /* kaartpapier */
+  --sheet:#f8faf6;      /* lichter vlak */
+  --ink:#20252b;        /* leisteen, kleur van de app-kop */
+  --muted:#4f5a54;
+  --forest:#2e7d32;     /* groen van de app */
+  --forest-deep:#1f5a24;
+  --pin:#e76f51;        /* speld uit het icoon, alleen voor stops */
+  --line:#c5d3c2;
+  --measure:36rem;
+  color-scheme:light;
+}
+*{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%}
+body{
+  margin:0;background:var(--paper);color:var(--ink);
+  font-family:"Lora",Georgia,"Times New Roman",serif;
+  font-size:1.125rem;line-height:1.65;
+  font-variant-numeric:oldstyle-nums proportional-nums;
+}
+a{color:var(--forest-deep);text-decoration-thickness:1px;text-underline-offset:.18em}
+a:hover{color:var(--forest)}
+:focus-visible{outline:3px solid var(--forest);outline-offset:3px;border-radius:4px}
+
+.wrap{max-width:68rem;margin:0 auto;padding:0 1.25rem}
+
+/* Kop */
+.site-head{display:flex;align-items:center;justify-content:space-between;gap:1rem;padding:1.25rem 0}
+.brand{display:flex;align-items:center;gap:.7rem;color:var(--ink);text-decoration:none;font-weight:700;font-size:1.15rem}
+.brand img{width:2.5rem;height:2.5rem;border-radius:.6rem}
+.head-link{font-size:1rem}
+
+/* Hero */
+.hero{display:grid;grid-template-columns:1fr;gap:2.5rem;padding:2.5rem 0 3.5rem;align-items:center}
+.hero h1{
+  font-size:clamp(2.4rem,6vw,4.1rem);line-height:1.05;letter-spacing:-.015em;
+  font-weight:700;margin:0 0 1.25rem;max-width:13ch;
+}
+.lead{font-size:1.25rem;max-width:var(--measure);margin:0 0 2rem;color:var(--ink)}
+.actions{display:flex;flex-wrap:wrap;gap:.75rem 1.25rem;align-items:center}
+.button{
+  display:inline-block;background:var(--forest);color:#fff;text-decoration:none;
+  font-weight:600;padding:.85rem 1.4rem;border-radius:.6rem;font-size:1.05rem;
+}
+.button:hover{background:var(--forest-deep);color:#fff}
+.quiet-link{font-size:1.05rem}
+
+/* De route: het ene opvallende element */
+.route{width:100%;height:auto;display:block}
+.route .road{fill:none;stroke:var(--forest);stroke-width:4;stroke-linecap:round;stroke-dasharray:2 11}
+.route .pin{fill:var(--pin)}
+.route .pin-hole{fill:var(--paper)}
+.route .start{fill:var(--ink)}
+.route .place{font:700 20px "Lora",Georgia,serif;fill:var(--ink)}
+.route .km{font:400 17px "Lora",Georgia,serif;fill:var(--muted);font-variant-numeric:lining-nums tabular-nums}
+.route-note{font-size:.95rem;color:var(--muted);margin:.5rem 0 0;font-style:italic}
+@media (prefers-reduced-motion:no-preference){
+  .route .road{animation:draw 2.4s ease-out both}
+  .route .stop{animation:appear .5s ease-out both}
+  .route .s1{animation-delay:.2s}.route .s2{animation-delay:.9s}.route .s3{animation-delay:1.5s}.route .s4{animation-delay:2.1s}
+  @keyframes draw{from{stroke-dashoffset:900}to{stroke-dashoffset:0}}
+  @keyframes appear{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:none}}
+}
+
+/* Secties */
+section{padding:3.5rem 0;border-top:1px solid var(--line)}
+h2{font-size:clamp(1.7rem,3.4vw,2.3rem);line-height:1.15;margin:0 0 1.5rem;font-weight:700;letter-spacing:-.01em;max-width:24ch}
+p{margin:0 0 1rem;max-width:var(--measure)}
+
+.log{display:grid;grid-template-columns:1fr;gap:1.5rem 3rem;margin:0}
+.log div{border-left:3px solid var(--forest);padding-left:1rem}
+.log dt{font-weight:700;font-size:1.15rem;margin-bottom:.2rem}
+.log dd{margin:0;color:var(--muted);max-width:30rem}
+
+.private{display:grid;grid-template-columns:1fr;gap:2rem;align-items:start}
+.private aside{background:var(--sheet);border:1px solid var(--line);border-radius:.9rem;padding:1.4rem 1.5rem}
+.private aside p{font-size:1rem;margin:0 0 .6rem}
+.private aside p:last-child{margin:0}
+
+.steps{list-style:none;counter-reset:step;padding:0;margin:0;display:grid;gap:1.5rem;max-width:40rem}
+.steps li{counter-increment:step;display:grid;grid-template-columns:2.6rem 1fr;gap:1rem;align-items:start}
+.steps li::before{
+  content:counter(step);display:flex;align-items:center;justify-content:center;
+  width:2.6rem;height:2.6rem;border-radius:50%;border:2px solid var(--forest);
+  color:var(--forest-deep);font-weight:700;font-variant-numeric:lining-nums;
+}
+.steps strong{display:block;font-size:1.15rem}
+.steps span{color:var(--muted)}
+
+/* Voet */
+.site-foot{padding:2.5rem 0 3rem;border-top:1px solid var(--line);font-size:1rem;color:var(--muted)}
+.site-foot nav{display:flex;flex-wrap:wrap;gap:.5rem 1.5rem;margin-bottom:.75rem}
+
+/* Privacy-pagina */
+.doc{max-width:42rem;padding:1rem 0 3rem}
+.doc h1{font-size:clamp(2rem,5vw,2.8rem);line-height:1.1;margin:1rem 0 .5rem}
+.doc h2{font-size:1.35rem;margin:2.2rem 0 .6rem;max-width:none}
+.doc p,.doc li{max-width:none}
+.doc ul{padding-left:1.2rem;margin:0 0 1rem}
+.doc .updated{color:var(--muted);font-style:italic}
+.fill{background:#fde7c8;padding:0 .25em;border-radius:3px}
+
+@media (max-width:51.99rem){
+  .route .place{font-size:25px}
+  .route .km{font-size:21px}
+}
+@media (min-width:52rem){
+  .hero{grid-template-columns:1fr 1.05fr;gap:3rem;padding:3.5rem 0 4.5rem}
+  .log{grid-template-columns:1fr 1fr}
+  .private{grid-template-columns:1.4fr 1fr}
+}
