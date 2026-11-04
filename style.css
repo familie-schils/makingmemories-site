@@ -90,6 +90,53 @@ p{margin:0 0 1rem;max-width:var(--measure)}
 .steps strong{display:block;font-size:1.15rem}
 .steps span{color:var(--muted)}
 
+/* Schriftje en app-kaart */
+.then-now{display:grid;grid-template-columns:1fr;gap:2.5rem;align-items:center}
+.then-now-visual{display:grid;grid-template-columns:1fr;gap:1.25rem;justify-items:center;padding:.5rem 0 1rem}
+.notebook{
+  position:relative;width:100%;max-width:19rem;padding:.9rem 1.2rem 1.4rem 2.6rem;
+  background-color:#fffdf6;
+  background-image:repeating-linear-gradient(to bottom,transparent 0,transparent calc(1.85rem - 1px),#cfdcea calc(1.85rem - 1px),#cfdcea 1.85rem);
+  background-position:0 .9rem;border-radius:.3rem .6rem .6rem .3rem;
+  box-shadow:0 1px 0 #e6dfcc,0 10px 24px rgba(32,37,43,.12);transform:rotate(-2.5deg);
+  font-style:italic;color:#2c3e66;font-size:1.05rem;line-height:1.85rem;
+}
+.notebook::before{content:"";position:absolute;top:0;bottom:0;left:1.9rem;width:1px;background:#e6a3a3}
+.notebook p{margin:0;max-width:none;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.notebook .nb-date{font-weight:700;color:#20252b}
+.notebook .nb-sum{float:right}
+.notebook s{text-decoration-color:#2c3e66}
+.notebook .stain{position:absolute;right:1rem;bottom:-.6rem;width:4.2rem;height:4.2rem;border-radius:50%;border:4px solid rgba(140,95,55,.18);pointer-events:none}
+
+.app-card{
+  width:100%;max-width:17.5rem;background:#fff;border-radius:1.1rem;padding:1rem 1.15rem 1.1rem;
+  box-shadow:0 12px 30px rgba(32,37,43,.16);border:1px solid var(--line);
+  font-family:system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;font-variant-numeric:lining-nums tabular-nums;
+}
+.app-card p{margin:0;max-width:none}
+.app-card-top{display:flex;align-items:center;gap:.45rem;font-size:.78rem;font-weight:600;text-transform:uppercase;letter-spacing:.06em;color:var(--forest-deep)}
+.app-dot{width:.6rem;height:.6rem;border-radius:50%;background:var(--pin)}
+.app-card .app-place{font-size:1.35rem;font-weight:700;margin:.35rem 0 .3rem;line-height:1.2}
+.app-place span{font-size:.95rem;font-weight:400;color:var(--muted);margin-left:.3rem}
+.app-row{font-size:.92rem;color:var(--muted);line-height:1.5}
+.app-card .app-stars{color:#e9a23b;font-size:1rem;letter-spacing:.1em;margin:.3rem 0 .55rem}
+.app-stars span{color:#d9dee2}
+.app-photos{display:grid;grid-template-columns:repeat(3,1fr);gap:.35rem;margin-bottom:.7rem}
+.app-photos span{aspect-ratio:1;border-radius:.45rem;background:linear-gradient(160deg,#9cc4d8 0 45%,#6f9e6a 45% 100%)}
+.app-photos span:nth-child(2){background:linear-gradient(170deg,#f3c38b 0 38%,#5f8f8b 38% 70%,#41664f 70%)}
+.app-photos span:nth-child(3){background:linear-gradient(150deg,#b9d3e6 0 55%,#c08a5a 55% 100%)}
+.app-shared{font-size:.85rem;color:var(--forest-deep);font-weight:600}
+
+/* Privé: kleine bovenkop */
+.kicker{font-size:.9rem;font-weight:700;text-transform:uppercase;letter-spacing:.09em;color:#b9472b;margin:0 0 .5rem}
+
+/* Meer functies */
+.features{list-style:none;padding:0;margin:0;display:grid;grid-template-columns:1fr;gap:1.25rem}
+.features li{background:var(--sheet);border:1px solid var(--line);border-radius:.9rem;padding:1.3rem 1.4rem 1.2rem}
+.features svg{width:2.1rem;height:2.1rem;fill:none;stroke:var(--forest);stroke-width:1.6;stroke-linecap:round;stroke-linejoin:round;margin-bottom:.4rem}
+.features h3{font-size:1.15rem;margin:0 0 .3rem;line-height:1.3}
+.features p{font-size:1rem;color:var(--muted);margin:0}
+
 /* Voet */
 .site-foot{padding:2.5rem 0 3rem;border-top:1px solid var(--line);font-size:1rem;color:var(--muted)}
 .site-foot nav{display:flex;flex-wrap:wrap;gap:.5rem 1.5rem;margin-bottom:.75rem}
@@ -111,4 +158,14 @@ p{margin:0 0 1rem;max-width:var(--measure)}
   .hero{grid-template-columns:1fr 1.05fr;gap:3rem;padding:3.5rem 0 4.5rem}
   .log{grid-template-columns:1fr 1fr}
   .private{grid-template-columns:1.4fr 1fr}
+  .then-now{grid-template-columns:1fr 1fr;gap:3rem}
+  .features{grid-template-columns:repeat(3,1fr)}
+}
+@media (min-width:36rem){
+  .then-now-visual{justify-items:stretch;gap:0}
+  .notebook{justify-self:start}
+  .app-card{justify-self:end;margin-top:-3rem;position:relative;z-index:1;transform:rotate(1.5deg)}
+}
+@media (min-width:36rem) and (max-width:51.99rem){
+  .features{grid-template-columns:1fr 1fr}
 }
