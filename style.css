@@ -137,6 +137,29 @@ p{margin:0 0 1rem;max-width:var(--measure)}
 .features h3{font-size:1.15rem;margin:0 0 .3rem;line-height:1.3}
 .features p{font-size:1rem;color:var(--muted);margin:0}
 
+/* Uitnodiging aanvragen */
+.request{margin-top:2.5rem;max-width:40rem;background:var(--sheet);border:1px solid var(--line);border-radius:.9rem;padding:1.5rem 1.5rem 1.2rem;scroll-margin-top:1rem}
+.request h3{font-size:1.35rem;margin:0 0 1rem}
+.request form{display:grid;gap:.9rem}
+.request label{display:block;font-weight:600;font-size:1rem}
+.request label input,.request label select,.request label textarea{display:block;margin-top:.3rem}
+.request .optional{font-weight:400;color:var(--muted)}
+.request input,.request select,.request textarea{
+  font:inherit;font-size:1rem;font-weight:400;color:var(--ink);background:#fff;
+  border:1px solid var(--line);border-radius:.55rem;padding:.65rem .75rem;width:100%;
+}
+.request input:focus,.request select:focus,.request textarea:focus{outline:3px solid rgba(46,125,50,.25);border-color:var(--forest)}
+.request textarea{resize:vertical}
+.request .field-row{display:grid;grid-template-columns:1fr;gap:.9rem}
+.request .button{justify-self:start;border:0;cursor:pointer;font-family:inherit}
+.request .button:disabled{opacity:.6;cursor:wait}
+.request .hp{position:absolute;left:-9999px;width:1px;height:1px;overflow:hidden}
+.form-status{margin:0;font-size:1rem;min-height:1.4em}
+.form-status.ok{color:var(--forest-deep);font-weight:600}
+.form-status.err{color:#b3261e;font-weight:600}
+.form-note{font-size:.9rem;color:var(--muted);margin:0}
+@media (min-width:36rem){.request .field-row{grid-template-columns:1fr 1fr}}
+
 /* Deel deze pagina */
 .share{border-top:1px solid var(--line);padding:2rem 0}
 .share-title{font-weight:700;font-size:1.15rem;margin:0 0 .75rem}
