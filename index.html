@@ -23,7 +23,7 @@
         <h1>Je reis, stop voor stop bewaard.</h1>
         <p class="lead">Making Memories is het reislogboek voor je camper, motor, fiets, boot of wandeltocht: waar je stond, hoe ver je ging, wat het kostte en de foto's die erbij horen. Alleen voor jou, je reisgenoten en de vrienden die jij kiest.</p>
         <div class="actions">
-          <a class="button" href="mailto:info@makingmemories.be?subject=Uitnodiging%20aanvragen%20voor%20Making%20Memories">Uitnodiging aanvragen</a>
+          <a class="button" href="#aanvragen">Uitnodiging aanvragen</a>
           <a class="quiet-link" href="https://app.makingmemories.be/">Ik heb al een account</a>
         </div>
       </div>
@@ -159,11 +159,36 @@
     <section aria-labelledby="erbij">
       <h2 id="erbij">Zo kom je erbij</h2>
       <ol class="steps">
-        <li><div><strong>Vraag een uitnodiging</strong><span>Stuur een mail naar <a href="mailto:info@makingmemories.be?subject=Uitnodiging%20aanvragen%20voor%20Making%20Memories">info@makingmemories.be</a>. Making Memories groeit bewust in een kleine kring.</span></div></li>
+        <li><div><strong>Vraag een uitnodiging</strong><span>Vul hieronder je naam en e-mailadres in. Making Memories groeit bewust in een kleine kring.</span></div></li>
         <li><div><strong>Maak je account aan</strong><span>Je krijgt een persoonlijke link. Daarmee maak je je account aan en staat je voertuig meteen klaar.</span></div></li>
         <li><div><strong>Zet de app op je beginscherm</strong><span>Android: in Chrome het menu, dan App installeren. iPhone: in Safari de deelknop, dan Zet op beginscherm.</span></div></li>
         <li><div><strong>Nodig je reisgenoten uit</strong><span>Je partner of vrienden kunnen meekijken of mee bijhouden in hetzelfde logboek.</span></div></li>
       </ol>
+
+      <div class="request" id="aanvragen">
+        <h3>Vraag je uitnodiging aan</h3>
+        <form id="aanvraagForm" novalidate>
+          <div class="field-row">
+            <label>Naam<input name="naam" type="text" autocomplete="name" maxlength="80" required></label>
+            <label>E-mailadres<input name="email" type="email" autocomplete="email" maxlength="200" required></label>
+          </div>
+          <label>Waarmee ga je op reis? <span class="optional">(mag leeg)</span>
+            <select name="soort">
+              <option value="">Kies…</option>
+              <option value="camper">Camper</option>
+              <option value="motor">Motor</option>
+              <option value="fiets">Fiets</option>
+              <option value="boot">Boot</option>
+              <option value="wandelen">Te voet</option>
+            </select>
+          </label>
+          <label>Bericht <span class="optional">(mag leeg)</span><textarea name="bericht" rows="3" maxlength="1000"></textarea></label>
+          <label class="hp" aria-hidden="true">Laat dit leeg<input name="website" type="text" tabindex="-1" autocomplete="off"></label>
+          <button class="button" type="submit">Uitnodiging aanvragen</button>
+          <p class="form-status" role="status" aria-live="polite"></p>
+          <p class="form-note">We gebruiken je gegevens alleen om je uit te nodigen en wissen je aanvraag na hoogstens 180 dagen (<a href="privacy.html">privacyverklaring</a>). Liever mailen? Dat kan op <a href="mailto:info@makingmemories.be?subject=Uitnodiging%20aanvragen%20voor%20Making%20Memories">info@makingmemories.be</a>.</p>
+        </form>
+      </div>
     </section>
   </main>
 
@@ -198,5 +223,37 @@
     <p>© 2026 Making Memories</p>
   </footer>
 </div>
+<script>
+(function(){
+  var form=document.getElementById('aanvraagForm');
+  if(!form)return;
+  // Op de eigen computer (localhost) gaat het naar de testdatabase.
+  var lokaal=location.hostname==='localhost';
+  var adres='https://'+(lokaal?'whebrmytlidfzvcickdh':'hktczewqpevvgxqcswov')+'.supabase.co/functions/v1/uitnodiging-aanvraag';
+  // Openbare sleutel (dezelfde als in de app), geen geheim.
+  var sleutel=lokaal?'sb_publishable_LPdEmMiecZRwwuV8b0Ai5A_cKDsCzK-':'sb_publishable_YmfLKfk25pED0oqoTbSYPA_LWhZIuZC';
+  var geladen=Date.now();
+  var status=form.querySelector('.form-status');
+  var knop=form.querySelector('button');
+  function meld(tekst,soort){status.textContent=tekst;status.className='form-status '+(soort||'');}
+  form.addEventListener('submit',function(e){
+    e.preventDefault();
+    var naam=form.naam.value.trim(), email=form.email.value.trim();
+    if(!naam){meld('Vul je naam in.','err');form.naam.focus();return;}
+    if(!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)){meld('Dit e-mailadres lijkt niet te kloppen.','err');form.email.focus();return;}
+    knop.disabled=true;meld('Even geduld…');
+    fetch(adres,{method:'POST',headers:{'Content-Type':'application/json','apikey':sleutel},body:JSON.stringify({
+      naam:naam,email:email,soort:form.soort.value,bericht:form.bericht.value,
+      website:form.website.value,ingevuld_ms:Date.now()-geladen
+    })}).then(function(r){return r.json().catch(function(){return {};}).then(function(d){return {ok:r.ok&&d.ok,fout:d.fout};});})
+    .then(function(r){
+      if(r.ok){form.reset();meld('Bedankt! Je aanvraag is goed aangekomen. Je hoort snel van ons.','ok');}
+      else{meld(r.fout||'Versturen lukte niet. Mail ons gerust op info@makingmemories.be.','err');}
+    })
+    .catch(function(){meld('Versturen lukte niet. Controleer je verbinding, of mail ons op info@makingmemories.be.','err');})
+    .then(function(){knop.disabled=false;});
+  });
+})();
+</script>
 </body>
 </html>
