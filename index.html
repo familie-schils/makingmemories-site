@@ -159,7 +159,7 @@
     <section aria-labelledby="erbij">
       <h2 id="erbij">Zo kom je erbij</h2>
       <ol class="steps">
-        <li><div><strong>Vraag een uitnodiging</strong><span>Vul hieronder je naam en e-mailadres in. Making Memories groeit bewust in een kleine kring.</span></div></li>
+        <li><div><strong>Vraag een uitnodiging</strong><span>Vul hieronder je naam, je e-mailadres en via wie je ons kent in. Making Memories groeit bewust in een kleine kring.</span></div></li>
         <li><div><strong>Maak je account aan</strong><span>Je krijgt een persoonlijke link. Daarmee maak je je account aan en staat je voertuig meteen klaar.</span></div></li>
         <li><div><strong>Zet de app op je beginscherm</strong><span>Android: in Chrome het menu, dan App installeren. iPhone: in Safari de deelknop, dan Zet op beginscherm.</span></div></li>
         <li><div><strong>Nodig je reisgenoten uit</strong><span>Je partner of vrienden kunnen meekijken of mee bijhouden in hetzelfde logboek.</span></div></li>
@@ -172,6 +172,7 @@
             <label>Naam<input name="naam" type="text" autocomplete="name" maxlength="80" required></label>
             <label>E-mailadres<input name="email" type="email" autocomplete="email" maxlength="200" required></label>
           </div>
+          <label>Via wie ken je Making Memories?<input name="via" type="text" maxlength="120" required placeholder="Bv. de naam van wie je deze link stuurde"></label>
           <label>Waarmee ga je op reis? <span class="optional">(mag leeg)</span>
             <select name="soort">
               <option value="">Kies…</option>
@@ -241,9 +242,14 @@
     var naam=form.naam.value.trim(), email=form.email.value.trim();
     if(!naam){meld('Vul je naam in.','err');form.naam.focus();return;}
     if(!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)){meld('Dit e-mailadres lijkt niet te kloppen.','err');form.email.focus();return;}
+    var via=form.via.value.trim();
+    if(!via){meld('Vul in via wie je Making Memories kent.','err');form.via.focus();return;}
+    // "Via wie" gaat mee in het bericht: database en mailfunctie hoeven niet te veranderen.
+    var extra=form.bericht.value.trim();
+    var bericht=('Via: '+via+(extra?'\n\n'+extra:'')).slice(0,1000);
     knop.disabled=true;meld('Even geduld…');
     fetch(adres,{method:'POST',headers:{'Content-Type':'application/json','apikey':sleutel},body:JSON.stringify({
-      naam:naam,email:email,soort:form.soort.value,bericht:form.bericht.value,
+      naam:naam,email:email,soort:form.soort.value,bericht:bericht,
       website:form.website.value,ingevuld_ms:Date.now()-geladen
     })}).then(function(r){return r.json().catch(function(){return {};}).then(function(d){return {ok:r.ok&&d.ok,fout:d.fout};});})
     .then(function(r){
