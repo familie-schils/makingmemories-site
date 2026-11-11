@@ -19,13 +19,15 @@
 
   <main class="doc">
     <h1>Privacyverklaring</h1>
-    <p class="updated">Laatst bijgewerkt op 4 november 2026.</p>
+    <p class="updated">Laatst bijgewerkt op 11 november 2026.</p>
 
     <div class="in-short">
       <h2>In het kort</h2>
       <ul>
         <li>We bewaren alleen wat je zelf in de app zet: je reizen, plaatsen, kosten, foto's en routes.</li>
         <li>Geen gps-tracking, geen reclame, geen volgcookies en geen openbare profielen.</li>
+        <li>Het weer in de app komt van een externe dienst. Daarvoor gaat een plek van ongeveer 1 km nauwkeurig mee, ook zonder dat je ergens op tikt.</li>
+        <li>Gebruik je een rolstoel en vink je dat in je profiel aan, dan is dat een gezondheidsgegeven. Dat ziet alleen jij.</li>
         <li>We verkopen niets en maken geen profielen van je.</li>
         <li>Alleen jij en de mensen die jij kiest, zien je gegevens.</li>
         <li>Je gegevens staan op servers in de EU, in Ierland.</li>
@@ -47,11 +49,23 @@
         <li>Je account: e-mailadres, weergavenaam en een versleuteld wachtwoord dat wij niet kunnen lezen.</li>
         <li>Wat je zelf invoert: voertuigen, reizen, overnachtingen, pauzes, uitstappen, kilometerstanden, tankbeurten, kosten, onderhoud, notities en namen van reisgenoten.</li>
         <li>Foto's en routes (GPX) die je toevoegt. Foto's worden verkleind; de locatie die in de foto zat, gaat daarbij verloren.</li>
+        <li>Per reis: of je met een rolstoel reist en je huisdieren (soort en naam). Bij een plek kun je optioneel invullen hoe toegankelijk ze was voor een rolstoel.</li>
         <li>Vrienden, uitnodigingen (met het e-mailadres van wie je uitnodigt), clubs en clubritten.</li>
         <li>Of je de gratis proef of volledige toegang hebt.</li>
         <li>Vraag je via deze website een uitnodiging aan: je naam, e-mailadres, via wie je ons kent, waarmee je reist en je bericht. Die aanvraag wissen we na hoogstens 180 dagen.</li>
       </ul>
-      <p>De app houdt je locatie niet op de achtergrond bij.</p>
+      <p>De app houdt je locatie niet op de achtergrond bij en bewaart je locatie niet in je account. Wat de app voor het weer doorgeeft, staat bij "Weer en plaatsen".</p>
+    </details>
+
+    <details>
+      <summary>Rolstoel: een gezondheidsgegeven</summary>
+      <p>In je profiel kun je aanvinken "Ik gebruik een rolstoel". Dat zegt iets over je gezondheid en valt onder de bijzondere gegevens van de AVG. Daarom bewaren we het alleen als je het zelf aanvinkt: dat vinkje is je uitdrukkelijke toestemming. We gebruiken het alleen om filters voor plaatsen standaard aan te zetten en rolstoelinfo te tonen.</p>
+      <ul>
+        <li>Dit profielgegeven staat in een aparte tabel die alleen jijzelf kunt lezen en wijzigen. Vrienden en de leden van je voertuig zien het niet.</li>
+        <li>Zet je het vinkje uit, dan wissen we het. Verwijder je je account, dan verdwijnt het ook.</li>
+        <li>Je kunt je toestemming altijd intrekken door het vinkje uit te zetten; wat eerder gebeurde, blijft rechtmatig.</li>
+      </ul>
+      <p>Bij een reis is dat anders: vink je daar "met rolstoel" aan, dan zien de mensen die die reis mogen zien (de leden van je voertuig en vrienden met wie je de reis deelt) een badge bij de reis. Hetzelfde geldt voor huisdieren en voor de toegankelijkheid die je bij een plek invult. Wil je dat niet, laat het dan leeg.</p>
     </details>
 
     <details>
@@ -79,6 +93,19 @@
       </ul>
       <p>Waar gegevens buiten de EU kunnen komen (Cloudflare, GitHub, onderaannemers van Supabase), gebeurt dat met de standaardcontractbepalingen van de Europese Commissie.</p>
       <p>Verder laadt de app de kaart van OpenStreetMap en programmacode van jsDelivr en cdnjs. Die zien je IP-adres, maar krijgen niets uit je account. Bij een nieuwe route stuurt de app alleen het begin- en eindpunt naar OpenStreetMap, om de plaatsnaam op te zoeken. Met "Deel in WhatsApp" open je zelf WhatsApp.</p>
+    </details>
+
+    <details>
+      <summary>Weer en plaatsen: wat de app naar buiten stuurt</summary>
+      <p>Voor camper en boot toont de app het weer. Het komt van het Noorse meteorologisch instituut (<strong>MET Norway</strong>, api.met.no; licentie CC BY 4.0). Je toestel vraagt het weer rechtstreeks bij die dienst, dus zij zien je IP-adres.</p>
+      <ul>
+        <li><strong>Wanneer:</strong> automatisch als je de startpagina opent, in de regel hooguit om de 15 minuten, ook zonder dat je ergens op tikt.</li>
+        <li><strong>Wat:</strong> één coördinaat, afgerond op twee decimalen (ongeveer 1 km nauwkeurig). Geen naam, geen e-mailadres, niets uit je account.</li>
+        <li><strong>Welke plek:</strong> eerst een plaats die je zelf koos, dan je huidige positie (alleen als je toestel de app al toestemming gaf; de app vraagt er niet zelf om, behalve als je "Weer hier" kiest), dan de overnachting waar je nu staat, dan een geplande overnachting, dan de laatst gebruikte plek. Voor een overnachting zoekt de app de coördinaat op: plaatsnaam, regio en land van die overnachting gaan automatisch naar <strong>Nominatim</strong> (OpenStreetMap), dat je IP-adres ziet.</li>
+        <li><strong>Op je toestel:</strong> de voorspelling en de laatst gebruikte plek (afgerond) bewaart de app in je browseropslag, niet op onze servers.</li>
+        <li><strong>Windy:</strong> in het weerblad staat een link naar Windy. Pas als je erop tikt, krijgt Windy een coördinaat (drie decimalen) en je IP-adres.</li>
+      </ul>
+      <p>Zoek je zelf een plaats of open je "In de buurt", dan gaat dat ook naar externe diensten, alleen na jouw tik en alleen met de zoektekst of de coördinaat: Nominatim (plaatsen zoeken), Photon van Komoot (reserve bij het zoeken), Wikidata en Wikivoyage (Wikimedia, Verenigde Staten; bezienswaardigheden en reisgids) en Waymarked Trails (fiets- en wandelroutes). Zij zien je IP-adres en niets uit je account.</p>
     </details>
 
     <details>
