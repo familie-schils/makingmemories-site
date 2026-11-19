@@ -217,3 +217,11 @@ p{margin:0 0 1rem;max-width:var(--measure)}
 @media (min-width:36rem) and (max-width:51.99rem){
   .features{grid-template-columns:1fr 1fr}
 }
+
+/* Taalkeuze NLD / GBR */
+.site-head{flex-wrap:wrap}
+.lang{display:flex;gap:.25rem;margin-left:auto;font-size:.875rem;font-weight:600;letter-spacing:.04em}
+.lang a,.lang span{padding:.25rem .55rem;border:1px solid var(--line);border-radius:.4rem;text-decoration:none;min-width:2.75rem;text-align:center}
+.lang a{color:var(--ink);background:var(--sheet)}
+.lang a:hover{border-color:var(--forest)}
+.lang span{background:var(--forest);border-color:var(--forest);color:#fff}
