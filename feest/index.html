@@ -1,0 +1,321 @@
+<!doctype html>
+<html lang="nl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Feestfoto's – alle foto's van je feest op één plek | Making Memories</title>
+<meta name="description" content="Je gasten scannen een QR-code en laden hun foto's op, zonder app en zonder account. Alles komt in één album en verschijnt op het grote scherm. Voor thuisfeesten, bruiloften, DJ's en feestzalen.">
+<meta name="theme-color" content="#20252b">
+<link rel="icon" type="image/svg+xml" href="../icon.svg">
+<link rel="apple-touch-icon" href="../icon-180.png">
+<link rel="stylesheet" href="../style.css">
+<style>
+:root{--feest:#7b3fa3;--feest-deep:#5e2d80;--feest-tint:#f1e8f6;--feest-line:#d9c4e6}
+.fe .button{background:var(--feest)}
+.fe .button:hover{background:var(--feest-deep)}
+.fe a{color:var(--feest-deep)}
+.fe a.button{color:#fff}
+.fe :focus-visible{outline-color:var(--feest)}
+.fe .kicker{color:var(--feest-deep)}
+.fe section{padding:2.5rem 0}
+.fe h2{font-size:clamp(1.7rem,4vw,2.3rem);line-height:1.15;margin:0 0 1rem}
+
+/* Hero-beeld: QR-kaartje en telefoon */
+.fe-visual{position:relative;min-height:25rem;max-width:30rem;margin:0 auto;width:100%}
+.qr-card{position:absolute;left:0;top:1.5rem;width:13rem;background:#fff;border:1px solid var(--feest-line);border-radius:1rem;padding:1.1rem;box-shadow:0 10px 30px rgba(32,37,43,.12);transform:rotate(-4deg);text-align:center}
+.qr-card p{margin:0;font-size:.95rem;line-height:1.3}
+.qr-card .qr-title{font-weight:700;font-size:1.05rem;margin-bottom:.6rem}
+.qr-card svg{width:8.5rem;height:8.5rem;display:block;margin:0 auto .6rem}
+.qr-card .qr-hint{color:var(--muted);font-size:.85rem}
+.phone{position:absolute;right:0;top:0;width:14.5rem;background:var(--ink);border-radius:2rem;padding:.6rem;box-shadow:0 14px 40px rgba(32,37,43,.25)}
+.phone-screen{background:#fff;border-radius:1.5rem;overflow:hidden;font-family:system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;font-size:.8rem;line-height:1.35}
+.ph-top{background:var(--feest);color:#fff;padding:1rem .9rem .8rem}
+.ph-top b{display:block;font-size:1rem}
+.ph-top span{opacity:.85}
+.ph-body{padding:.8rem .9rem 1rem}
+.ph-btn{display:block;text-align:center;background:var(--feest-tint);color:var(--feest-deep);border:1px solid var(--feest-line);border-radius:.7rem;padding:.6rem;font-weight:600;margin-bottom:.8rem}
+.ph-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:.3rem}
+.ph-grid span{aspect-ratio:1;border-radius:.35rem;display:block}
+.ph-grid span:nth-child(1){background:linear-gradient(135deg,#e9b872,#c0604a)}
+.ph-grid span:nth-child(2){background:linear-gradient(135deg,#7b3fa3,#d98bb8)}
+.ph-grid span:nth-child(3){background:linear-gradient(135deg,#3d6f8f,#9fc6c9)}
+.ph-grid span:nth-child(4){background:linear-gradient(135deg,#5b8c4a,#d7d58a)}
+.ph-grid span:nth-child(5){background:linear-gradient(135deg,#a44a5c,#f2c6a0)}
+.ph-grid span:nth-child(6){background:linear-gradient(135deg,#2f3e5c,#8b7bb8)}
+.ph-note{color:var(--muted);margin:.6rem 0 0}
+.fe-visual-note{position:absolute;left:0;right:0;bottom:0;font-size:.95rem;color:var(--muted);font-style:italic;margin:0}
+
+/* Stappen */
+.fe-steps{list-style:none;padding:0;margin:1.5rem 0 0;display:grid;gap:1rem;counter-reset:st}
+.fe-steps li{background:var(--sheet);border:1px solid var(--line);border-radius:1rem;padding:1.2rem 1.3rem;counter-increment:st}
+.fe-steps li::before{content:counter(st);display:inline-grid;place-items:center;width:2rem;height:2rem;border-radius:50%;background:var(--feest);color:#fff;font-weight:700;margin-bottom:.5rem}
+.fe-steps strong{display:block;font-size:1.1rem}
+.fe-steps span{color:var(--muted)}
+
+/* Wat je krijgt */
+.fe-list{display:grid;gap:1rem 2rem;margin:1.5rem 0 0;padding:0;list-style:none}
+.fe-list li{border-top:1px solid var(--feest-line);padding-top:.8rem}
+.fe-list h3{margin:0 0 .25rem;font-size:1.1rem}
+.fe-list p{margin:0;color:var(--muted)}
+
+/* Voor wie */
+.fe-who{display:flex;flex-wrap:wrap;gap:.6rem;margin:1rem 0 0;padding:0;list-style:none}
+.fe-who li{background:var(--feest-tint);border:1px solid var(--feest-line);border-radius:999px;padding:.35rem 1rem;font-size:1rem}
+
+/* Prijzen */
+.plans{display:grid;gap:1.25rem;margin:1.5rem 0 0}
+.plan{background:#fff;border:1px solid var(--line);border-radius:1.1rem;padding:1.5rem;display:flex;flex-direction:column}
+.plan.main{border:2px solid var(--feest);box-shadow:0 10px 30px rgba(123,63,163,.12)}
+.plan .tag{align-self:flex-start;background:var(--feest);color:#fff;font-size:.8rem;font-weight:700;border-radius:999px;padding:.15rem .7rem;margin-bottom:.6rem}
+.plan h3{margin:0;font-size:1.3rem}
+.plan .for{color:var(--muted);margin:.2rem 0 1rem;font-size:1rem}
+.plan .price{font-size:2.2rem;font-weight:700;line-height:1;margin:0;font-variant-numeric:lining-nums}
+.plan .per{color:var(--muted);font-size:.95rem;margin:.3rem 0 1rem}
+.plan ul{margin:0 0 1.4rem;padding:0;list-style:none;flex:1}
+.plan li{padding:.35rem 0 .35rem 1.6rem;position:relative;font-size:1rem;border-bottom:1px solid #eef0ec}
+.plan li::before{content:"";position:absolute;left:.2rem;top:.85rem;width:.75rem;height:.4rem;border-left:2px solid var(--feest);border-bottom:2px solid var(--feest);transform:rotate(-45deg)}
+.plan .button{text-align:center}
+.plan.quiet .button{background:var(--feest-tint);color:var(--feest-deep);border:1px solid var(--feest-line)}
+.plan.quiet .button:hover{background:var(--feest);color:#fff}
+.plans-note{font-size:.95rem;color:var(--muted);margin:1rem 0 0}
+
+/* Vragen */
+.fe-faq details{border-top:1px solid var(--line);padding:.9rem 0}
+.fe-faq details:last-child{border-bottom:1px solid var(--line)}
+.fe-faq summary{cursor:pointer;font-weight:700}
+.fe-faq p{margin:.5rem 0 0;color:var(--muted)}
+
+.fe .request{border-color:var(--feest-line)}
+
+@media (min-width:52rem){
+  .fe .hero{grid-template-columns:1.1fr 1fr}
+  .fe-steps{grid-template-columns:repeat(3,1fr)}
+  .fe-list{grid-template-columns:repeat(2,1fr)}
+  .plans{grid-template-columns:repeat(3,1fr);align-items:stretch}
+}
+@media (max-width:26rem){
+  .fe-visual{min-height:27rem}
+  .qr-card{width:11rem;padding:.8rem}
+  .qr-card svg{width:7rem;height:7rem}
+  .phone{width:12.5rem}
+}
+</style>
+</head>
+<body>
+<div class="wrap fe">
+  <header class="site-head">
+    <a class="brand" href="../"><img src="../icon.svg" alt="" width="40" height="40">Making Memories</a>
+    <a class="head-link" href="#prijzen">Prijzen</a>
+  </header>
+
+  <main>
+    <div class="hero">
+      <div>
+        <p class="kicker">Making Memories voor feesten</p>
+        <h1>Alle foto's van je feest, op één plek.</h1>
+        <p class="lead">Je gasten scannen een QR-code en laden hun foto's op. Geen app, geen account, geen WhatsApp-groep met 80 mensen. Alles komt in één album en verschijnt, als je wilt, meteen op het grote scherm.</p>
+        <div class="actions">
+          <a class="button" href="#prijzen">Bekijk de prijzen</a>
+          <a class="quiet-link" href="#hoe">Hoe werkt het?</a>
+        </div>
+      </div>
+
+      <figure class="fe-visual" style="margin:0" aria-label="Voorbeeld: een QR-kaartje op tafel en het album op de telefoon van een gast">
+        <div class="qr-card" aria-hidden="true">
+          <p class="qr-title">Feest voor Rita 70</p>
+          <svg viewBox="0 0 29 29" shape-rendering="crispEdges">
+            <rect width="29" height="29" fill="#fff"/>
+            <g fill="#20252b">
+              <path d="M2 2h7v7H2zM3 3v5h5V3zM4 4h3v3H4zM20 2h7v7h-7zM21 3v5h5V3zM22 4h3v3h-3zM2 20h7v7H2zM3 21v5h5v-5zM4 22h3v3H4z" fill-rule="evenodd"/>
+              <path d="M11 2h1v1h-1zM13 2h2v1h-2zM16 3h1v2h-1zM11 4h2v1h-2zM14 5h2v1h-2zM12 6h1v2h-1zM15 7h2v1h-2zM11 9h1v1h-1zM2 11h2v1H2zM5 11h1v2H5zM7 10h2v1H7zM10 11h3v1h-3zM14 10h1v2h-1zM16 11h2v1h-2zM19 10h1v1h-1zM21 11h2v1h-2zM24 10h1v2h-1zM26 11h1v1h-1zM3 13h1v2H3zM8 13h2v1H8zM12 13h1v1h-1zM15 13h3v1h-3zM20 13h1v2h-1zM23 13h2v1h-2zM2 16h2v1H2zM6 15h1v2H6zM9 16h3v1H9zM13 15h1v2h-1zM17 16h2v1h-2zM22 15h1v1h-1zM25 16h2v1h-2zM11 18h1v2h-1zM14 18h3v1h-3zM19 18h1v1h-1zM21 17h1v2h-1zM23 18h3v1h-3zM12 21h2v1h-2zM16 20h1v2h-1zM18 21h2v1h-2zM22 20h1v2h-1zM25 21h1v1h-1zM11 23h1v1h-1zM14 23h1v2h-1zM17 24h3v1h-3zM21 23h2v1h-2zM24 24h3v1h-3zM12 26h2v1h-2zM16 26h1v1h-1zM19 26h2v1h-2zM23 26h1v1h-1zM26 26h1v1h-1z"/>
+            </g>
+          </svg>
+          <p class="qr-hint">Scan en deel je foto's</p>
+        </div>
+        <div class="phone" aria-hidden="true">
+          <div class="phone-screen">
+            <div class="ph-top"><b>Feest voor Rita 70</b><span>Zaal De Linde · 112 foto's</span></div>
+            <div class="ph-body">
+              <span class="ph-btn">Foto toevoegen</span>
+              <div class="ph-grid"><span></span><span></span><span></span><span></span><span></span><span></span></div>
+              <p class="ph-note">Ingrid, 21:14 – "Iedereen stond meteen te dansen."</p>
+            </div>
+          </div>
+        </div>
+        <figcaption class="fe-visual-note">De QR-code ligt op tafel. Elke foto staat meteen in het album van het feest.</figcaption>
+      </figure>
+    </div>
+
+    <section id="hoe" aria-labelledby="hoe-t">
+      <h2 id="hoe-t">Zo werkt het</h2>
+      <ol class="fe-steps">
+        <li><strong>Maak je feest aan</strong><span>Naam, datum en uur. Je krijgt een QR-code om af te drukken of op het scherm te tonen.</span></li>
+        <li><strong>Gasten scannen en delen</strong><span>Ze kiezen een bijnaam, geven toestemming en laden hun foto's op met een bericht erbij. Zonder app of account.</span></li>
+        <li><strong>Iedereen heeft het album</strong><span>Na het feest kan nog 24 uur opgeladen worden. Daarna krijgt iedereen een link naar het hele album.</span></li>
+      </ol>
+    </section>
+
+    <section aria-labelledby="krijgt">
+      <h2 id="krijgt">Wat je krijgt</h2>
+      <ul class="fe-list">
+        <li><h3>Eén album, in de juiste volgorde</h3><p>Alle foto's van alle gasten samen, op het moment dat ze genomen zijn. Niemand hoeft nog foto's door te sturen.</p></li>
+        <li><h3>Op het grote scherm</h3><p>Een tv of beamer toont de nieuwe foto's als diavoorstelling. Met een korte vertraging, zodat jij een foto nog kunt weghalen.</p></li>
+        <li><h3>Gastheren die helpen</h3><p>Geef een paar vrienden of medewerkers een eigen link: zij delen de QR-code rond en houden het album netjes.</p></li>
+        <li><h3>Gasten houden de controle</h3><p>Wie niet op het scherm wil, vinkt dat aan. Een gast kan zijn eigen foto's altijd weer wissen.</p></li>
+        <li><h3>Drukkwaliteit</h3><p>Foto's worden bewaard in een kwaliteit die goed genoeg is voor een fotoboek of een afdruk aan de muur.</p></li>
+        <li><h3>Privé en in Europa</h3><p>Geen openbaar album, geen reclame, geen volgcookies. De gegevens staan op servers in de Europese Unie.</p></li>
+      </ul>
+    </section>
+
+    <section aria-labelledby="wie">
+      <h2 id="wie">Voor wie?</h2>
+      <p>Voor iedereen die na een feest wil kunnen zeggen: kijk, hier staat alles.</p>
+      <ul class="fe-who">
+        <li>Verjaardag thuis</li><li>Bruiloft</li><li>Jubileum</li><li>Communie en lentefeest</li><li>Bedrijfsfeest</li><li>Personeelsfeest</li><li>Afscheid</li><li>DJ's</li><li>Feestzalen</li><li>Evenementenbureaus</li>
+      </ul>
+    </section>
+
+    <section id="prijzen" aria-labelledby="prijzen-t">
+      <h2 id="prijzen-t">Prijzen</h2>
+      <p>Geen grens op het aantal foto's of gasten. Je kiest hoeveel opslag je nodig hebt.</p>
+      <div class="plans">
+        <article class="plan quiet">
+          <h3>Thuisfeest</h3>
+          <p class="for">Verjaardag of etentje met familie en vrienden</p>
+          <p class="price">€ 14,95</p>
+          <p class="per">eenmalig, per feest</p>
+          <ul>
+            <li>2 GB opslag, ± 800 foto's</li>
+            <li>QR-code om af te drukken</li>
+            <li>1 fotoscherm (tv of beamer)</li>
+            <li>Opladen tot 24 uur na het feest</li>
+            <li>Albumlink voor alle gasten</li>
+          </ul>
+          <a class="button" href="#aanvragen" data-pakket="Thuisfeest">Kies Thuisfeest</a>
+        </article>
+        <article class="plan main">
+          <span class="tag">Meest gekozen</span>
+          <h3>Feest</h3>
+          <p class="for">Bruiloft, jubileum, bedrijfsfeest</p>
+          <p class="price">€ 39</p>
+          <p class="per">eenmalig, per feest</p>
+          <ul>
+            <li>10 GB opslag, ± 4.000 foto's</li>
+            <li>Tot 3 fotoschermen tegelijk</li>
+            <li>Tot 4 gastheren met een eigen link</li>
+            <li>Eigen welkomstfoto voor je gasten</li>
+            <li>Albumlink voor alle gasten</li>
+          </ul>
+          <a class="button" href="#aanvragen" data-pakket="Feest">Kies Feest</a>
+        </article>
+        <article class="plan quiet">
+          <h3>Jaarabonnement</h3>
+          <p class="for">Voor feestzalen, DJ's en organisatoren</p>
+          <p class="price">€ 29</p>
+          <p class="per">per maand, per jaar gefactureerd</p>
+          <ul>
+            <li>Onbeperkt feesten op je eigen naam</li>
+            <li>Tot 2 feesten tegelijk actief</li>
+            <li>50 GB opslag</li>
+            <li>Medewerkers met eigen toegang</li>
+            <li>Alles uit het pakket Feest</li>
+          </ul>
+          <a class="button" href="#aanvragen" data-pakket="Jaarabonnement">Vraag een gesprek aan</a>
+        </article>
+      </div>
+      <p class="plans-note">Prijzen inclusief btw. Het jaarabonnement is voor feesten die je zelf organiseert of in je eigen zaal laat doorgaan. Feesten doorverkopen of uitlenen aan andere zalen of organisatoren mag niet.</p>
+    </section>
+
+    <section class="fe-faq" aria-labelledby="vragen">
+      <h2 id="vragen">Vragen</h2>
+      <details><summary>Moeten mijn gasten een app installeren?</summary><p>Nee. De QR-code opent een webpagina. Een gast kiest een bijnaam en kan meteen foto's toevoegen, op iPhone en Android.</p></details>
+      <details><summary>Waarom betaal ik voor opslag en niet per foto?</summary><p>Zo hoef je niet te tellen. Een thuisfeest met 30 gasten blijft meestal ruim onder 2 GB. Voor een bruiloft met 150 gasten kies je beter 10 GB.</p></details>
+      <details><summary>Kan iemand ongepaste foto's op het scherm zetten?</summary><p>Elke foto verschijnt met een korte vertraging op het scherm. In die tijd kan jij of een gastheer een foto nog weghalen.</p></details>
+      <details><summary>Wat gebeurt er met de foto's na het feest?</summary><p>Tot 24 uur na het einde kunnen gasten nog foto's toevoegen. Daarna krijgt iedereen de albumlink. Hoe lang het album bewaard blijft, staat in de <a href="../voorwaarden.html">voorwaarden</a>.</p></details>
+      <details><summary>Ik ben DJ of heb een feestzaal. Hoe werkt het jaarabonnement?</summary><p>Je maakt zelf een feest aan voor elk feest dat je doet of in je zaal laat doorgaan. Je klanten krijgen hun eigen QR-code en album. Je kunt het tonen als extra in je aanbod. Laat je gegevens na, dan bellen we je.</p></details>
+    </section>
+
+    <section aria-labelledby="aanvragen-t">
+      <div class="request" id="aanvragen">
+        <h3 id="aanvragen-t">Vraag je feest aan</h3>
+        <p>Laat je gegevens na. We maken je feest samen klaar en sturen je de betaallink.</p>
+        <form id="feestForm" novalidate>
+          <div class="field-row">
+            <label>Naam<input name="naam" type="text" autocomplete="name" maxlength="80" required></label>
+            <label>E-mailadres<input name="email" type="email" autocomplete="email" maxlength="200" required></label>
+          </div>
+          <div class="field-row">
+            <label>Pakket
+              <select name="pakket" required>
+                <option value="Thuisfeest">Thuisfeest (€ 14,95)</option>
+                <option value="Feest" selected>Feest (€ 39)</option>
+                <option value="Jaarabonnement">Jaarabonnement (vanaf € 29/maand)</option>
+              </select>
+            </label>
+            <label>Datum van het feest <span class="optional">(mag leeg)</span><input name="datum" type="date"></label>
+          </div>
+          <label>Wat voor feest of zaak? <span class="optional">(mag leeg)</span><input name="wat" type="text" maxlength="120" placeholder="Bv. 50ste verjaardag, bruiloft, DJ, feestzaal"></label>
+          <label>Bericht <span class="optional">(mag leeg)</span><textarea name="bericht" rows="3" maxlength="700"></textarea></label>
+          <label class="hp" aria-hidden="true">Laat dit leeg<input name="website" type="text" tabindex="-1" autocomplete="off"></label>
+          <button class="button" type="submit">Feest aanvragen</button>
+          <p class="form-status" role="status" aria-live="polite"></p>
+          <p class="form-note">We gebruiken je gegevens alleen om je feest klaar te zetten en wissen je aanvraag na hoogstens 180 dagen (<a href="../privacy.html">privacyverklaring</a>). Liever mailen? Dat kan op <a href="mailto:info@makingmemories.be?subject=Feest%20aanvragen">info@makingmemories.be</a>.</p>
+        </form>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-foot">
+    <nav aria-label="Voettekst">
+      <a href="mailto:info@makingmemories.be">info@makingmemories.be</a>
+      <a href="../privacy.html">Privacyverklaring</a>
+      <a href="../voorwaarden.html">Voorwaarden</a>
+      <a href="../">Making Memories voor reizen</a>
+    </nav>
+    <p>© 2026 Making Memories</p>
+  </footer>
+</div>
+<script>
+(function(){
+  var form=document.getElementById('feestForm');
+  if(!form)return;
+  // Knoppen in de prijskaarten zetten het gekozen pakket in het formulier.
+  Array.prototype.forEach.call(document.querySelectorAll('[data-pakket]'),function(a){
+    a.addEventListener('click',function(){form.pakket.value=a.getAttribute('data-pakket');});
+  });
+  // Zelfde functie als het uitnodigingsformulier op de startpagina; op localhost naar de testdatabase.
+  var lokaal=location.hostname==='localhost';
+  var adres='https://'+(lokaal?'whebrmytlidfzvcickdh':'hktczewqpevvgxqcswov')+'.supabase.co/functions/v1/uitnodiging-aanvraag';
+  // Openbare sleutel (dezelfde als in de app), geen geheim.
+  var sleutel=lokaal?'sb_publishable_LPdEmMiecZRwwuV8b0Ai5A_cKDsCzK-':'sb_publishable_YmfLKfk25pED0oqoTbSYPA_LWhZIuZC';
+  var geladen=Date.now();
+  var status=form.querySelector('.form-status');
+  var knop=form.querySelector('button');
+  function meld(tekst,soort){status.textContent=tekst;status.className='form-status '+(soort||'');}
+  form.addEventListener('submit',function(e){
+    e.preventDefault();
+    var naam=form.naam.value.trim(), email=form.email.value.trim();
+    if(!naam){meld('Vul je naam in.','err');form.naam.focus();return;}
+    if(!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)){meld('Dit e-mailadres lijkt niet te kloppen.','err');form.email.focus();return;}
+    // Pakket, datum en soort feest gaan mee in het bericht: database en mailfunctie blijven gelijk.
+    var regels=['FEEST – pakket: '+form.pakket.value];
+    if(form.datum.value)regels.push('Datum: '+form.datum.value);
+    if(form.wat.value.trim())regels.push('Wat: '+form.wat.value.trim());
+    var extra=form.bericht.value.trim();
+    var bericht=(regels.join('\n')+(extra?'\n\n'+extra:'')).slice(0,1000);
+    knop.disabled=true;meld('Even geduld…');
+    fetch(adres,{method:'POST',headers:{'Content-Type':'application/json','apikey':sleutel},body:JSON.stringify({
+      naam:naam,email:email,soort:'',bericht:bericht,
+      website:form.website.value,ingevuld_ms:Date.now()-geladen
+    })}).then(function(r){return r.json().catch(function(){return {};}).then(function(d){return {ok:r.ok&&d.ok,fout:d.fout};});})
+    .then(function(r){
+      if(r.ok){form.reset();meld('Bedankt! Je aanvraag is goed aangekomen. We nemen snel contact op.','ok');}
+      else{meld(r.fout||'Versturen lukte niet. Mail ons gerust op info@makingmemories.be.','err');}
+    })
+    .catch(function(){meld('Versturen lukte niet. Controleer je verbinding, of mail ons op info@makingmemories.be.','err');})
+    .then(function(){knop.disabled=false;});
+  });
+})();
+</script>
+</body>
+</html>
