@@ -1,0 +1,134 @@
+<!doctype html>
+<html lang="nl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex">
+<title>Je feest staat klaar | Making Memories</title>
+<meta name="theme-color" content="#20252b">
+<link rel="icon" type="image/svg+xml" href="../icon.svg">
+<link rel="stylesheet" href="../style.css">
+<style>
+:root{--feest:#7b3fa3;--feest-deep:#5e2d80;--feest-tint:#f1e8f6;--feest-line:#d9c4e6}
+.fe a{color:var(--feest-deep)}
+.fe h1{font-size:clamp(2rem,5vw,3rem);line-height:1.1;margin:1.5rem 0 .5rem}
+.wacht{color:var(--muted)}
+.links{display:grid;gap:1.25rem;margin:2rem 0}
+.link-kaart{background:#fff;border:1px solid var(--line);border-radius:1.1rem;padding:1.4rem}
+.link-kaart.org{border:2px solid var(--feest)}
+.link-kaart h2{margin:0 0 .3rem;font-size:1.25rem}
+.link-kaart p{margin:0 0 .8rem;color:var(--muted);font-size:1rem}
+.link-rij{display:flex;gap:.5rem;flex-wrap:wrap}
+.link-rij input{flex:1 1 14rem;min-width:0;font:inherit;font-size:.95rem;padding:.6rem .7rem;border:1px solid var(--line);border-radius:.5rem;background:var(--sheet)}
+.knop{font:inherit;font-size:1rem;font-weight:600;border-radius:.6rem;padding:.6rem 1.1rem;cursor:pointer;border:1px solid var(--feest-line);background:var(--feest-tint);color:var(--feest-deep);text-decoration:none;display:inline-block}
+.knop:hover,.knop.hoofd{background:var(--feest);color:#fff;border-color:var(--feest)}
+.knop.hoofd:hover{background:var(--feest-deep)}
+.extra{display:flex;gap:.6rem;flex-wrap:wrap;margin-top:.8rem}
+.mail{background:var(--feest-tint);border:1px solid var(--feest-line);border-radius:.8rem;padding:1rem 1.2rem;font-size:1rem}
+.demo{background:#fff6d6;border:1px solid #e6cf7a;border-radius:.6rem;padding:.5rem .9rem;font-size:.9rem;margin-top:1rem}
+@media (min-width:52rem){.links{grid-template-columns:1fr 1fr}}
+</style>
+</head>
+<body>
+<div class="wrap fe">
+  <header class="site-head">
+    <a class="brand" href="../"><img src="../icon.svg" alt="" width="40" height="40">Making Memories</a>
+  </header>
+  <main>
+    <div id="bezig">
+      <h1>Even geduld…</h1>
+      <p class="wacht" role="status">We wachten op de bevestiging van je betaling. Dat duurt meestal een paar seconden.</p>
+    </div>
+
+    <div id="klaar" hidden>
+      <h1>Je feest staat klaar</h1>
+      <p class="lead"><b id="feestNaam"></b> <span id="feestWanneer"></span></p>
+
+      <div class="links">
+        <div class="link-kaart">
+          <h2>Link voor je gasten</h2>
+          <p>Deel deze link of de QR-code. Gasten hebben geen app of account nodig.</p>
+          <div class="link-rij"><input id="gastLink" readonly aria-label="Link voor je gasten"><button class="knop" data-kopieer="gastLink">Kopiëren</button></div>
+          <div class="extra">
+            <a class="knop" id="waGast" target="_blank" rel="noopener noreferrer">Delen via WhatsApp</a>
+            <a class="knop" id="drukQr">QR-affiche afdrukken</a>
+          </div>
+        </div>
+        <div class="link-kaart org">
+          <h2>Jouw link als organisator</h2>
+          <p>Hiermee beheer je je feest: fotoscherm, gastheren, welkomstfoto en het album. Deel deze link met niemand.</p>
+          <div class="link-rij"><input id="orgLink" readonly aria-label="Jouw link als organisator"><button class="knop" data-kopieer="orgLink">Kopiëren</button></div>
+          <div class="extra"><a class="knop hoofd" id="openOrg">Open je feest</a></div>
+        </div>
+      </div>
+
+      <p class="mail">We hebben beide links en je factuur ook gemaild naar <b id="mailAdres"></b>, van <b>info@makingmemories.be</b>. Niets gekregen? Kijk in je spam, of mail ons op <a href="mailto:info@makingmemories.be">info@makingmemories.be</a>.</p>
+    </div>
+
+    <div id="mislukt" hidden>
+      <h1>De betaling is niet gelukt</h1>
+      <p>Er is niets afgeschreven. <a href="./#bestellen">Probeer opnieuw</a>, of mail ons op <a href="mailto:info@makingmemories.be">info@makingmemories.be</a>.</p>
+    </div>
+  </main>
+  <footer class="site-foot">
+    <nav aria-label="Voettekst">
+      <a href="mailto:info@makingmemories.be">info@makingmemories.be</a>
+      <a href="../privacy.html">Privacyverklaring</a>
+      <a href="../voorwaarden.html">Voorwaarden</a>
+    </nav>
+    <p>© 2026 Making Memories</p>
+  </footer>
+</div>
+<script>
+(function(){
+  var q=new URLSearchParams(location.search);
+  var demo=q.get('demo')==='1';
+  var bestel=q.get('b')||'';
+  var lokaal=location.hostname==='localhost';
+  var basis='https://'+(lokaal?'whebrmytlidfzvcickdh':'hktczewqpevvgxqcswov')+'.supabase.co/functions/v1/';
+  var sleutel=lokaal?'sb_publishable_LPdEmMiecZRwwuV8b0Ai5A_cKDsCzK-':'sb_publishable_YmfLKfk25pED0oqoTbSYPA_LWhZIuZC';
+  var $=function(id){return document.getElementById(id);};
+  var appUrl=/^https:\/\/app\.makingmemories\.be\//;
+
+  function toon(d){
+    if(!appUrl.test(d.gast_link)||!appUrl.test(d.org_link))return mislukt();
+    $('bezig').hidden=true;$('klaar').hidden=false;
+    $('feestNaam').textContent=d.feest||'';
+    $('feestWanneer').textContent=d.wanneer?'· '+d.wanneer:'';
+    $('gastLink').value=d.gast_link;$('orgLink').value=d.org_link;
+    $('mailAdres').textContent=d.email||'je e-mailadres';
+    $('waGast').href='https://wa.me/?text='+encodeURIComponent('Deel je foto\'s van '+(d.feest||'het feest')+': '+d.gast_link);
+    $('openOrg').href=d.org_link;
+    // De affiche drukt de app af (qr-afdruk.js); de organisatorlink opent daar meteen het afdrukscherm.
+    $('drukQr').href=d.org_link+(d.org_link.indexOf('#')<0?'#':'&')+'afdrukken';
+    if(demo)$('klaar').insertAdjacentHTML('beforeend','<p class="demo">Voorbeeld: dit is een demo zonder echte betaling.</p>');
+  }
+  function mislukt(){$('bezig').hidden=true;$('mislukt').hidden=false;}
+
+  Array.prototype.forEach.call(document.querySelectorAll('[data-kopieer]'),function(k){
+    k.addEventListener('click',function(){
+      var v=$(k.getAttribute('data-kopieer')).value;
+      var klaar=function(){k.textContent='Gekopieerd';setTimeout(function(){k.textContent='Kopiëren';},2000);};
+      if(navigator.clipboard)navigator.clipboard.writeText(v).then(klaar,function(){$(k.getAttribute('data-kopieer')).select();});
+      else{$(k.getAttribute('data-kopieer')).select();document.execCommand('copy');klaar();}
+    });
+  });
+
+  if(demo){toon({feest:'Feest voor Rita 70',wanneer:'zaterdag 13 december, 19:00',gast_link:'https://app.makingmemories.be/#gast=VOORBEELD',org_link:'https://app.makingmemories.be/#feest=VOORBEELD',email:'jij@voorbeeld.be'});return;}
+  if(!/^[A-Za-z0-9_-]{20,80}$/.test(bestel))return mislukt();
+
+  // Status opvragen bij feest-bestelling-status (nog te bouwen): betaald → links, open → opnieuw, mislukt → melding.
+  var pogingen=0;
+  (function vraag(){
+    fetch(basis+'feest-bestelling-status',{method:'POST',headers:{'Content-Type':'application/json','apikey':sleutel},body:JSON.stringify({b:bestel})})
+    .then(function(r){return r.json();})
+    .then(function(d){
+      if(d.status==='klaar')return toon(d);
+      if(d.status==='open'&&++pogingen<40)return setTimeout(vraag,3000);
+      mislukt();
+    }).catch(function(){if(++pogingen<40)setTimeout(vraag,3000);else mislukt();});
+  })();
+})();
+</script>
+</body>
+</html>

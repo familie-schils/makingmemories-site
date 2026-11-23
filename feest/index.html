@@ -86,6 +86,11 @@
 .fe-faq p{margin:.5rem 0 0;color:var(--muted)}
 
 .fe .request{border-color:var(--feest-line)}
+.fe .request + .request,.fe section + section .request{margin-top:0}
+.pakket-keuze{border:1px solid var(--feest-line);border-radius:.6rem;padding:.6rem 1rem;margin:0 0 1rem;display:flex;flex-wrap:wrap;gap:.4rem 1.5rem}
+.pakket-keuze legend{font-weight:600;padding:0 .3rem}
+.pakket-keuze label,.request label.check{display:flex;gap:.5rem;align-items:flex-start;font-weight:400}
+.pakket-keuze input,.request label.check input{width:auto;margin-top:.35rem;accent-color:var(--feest)}
 
 @media (min-width:52rem){
   .fe .hero{grid-template-columns:1.1fr 1fr}
@@ -191,7 +196,7 @@
             <li>Opladen tot 24 uur na het feest</li>
             <li>Albumlink voor alle gasten</li>
           </ul>
-          <a class="button" href="#aanvragen" data-pakket="Thuisfeest">Kies Thuisfeest</a>
+          <a class="button" href="#bestellen" data-pakket="thuisfeest">Bestel Thuisfeest</a>
         </article>
         <article class="plan main">
           <span class="tag">Meest gekozen</span>
@@ -206,7 +211,7 @@
             <li>Eigen welkomstfoto voor je gasten</li>
             <li>Albumlink voor alle gasten</li>
           </ul>
-          <a class="button" href="#aanvragen" data-pakket="Feest">Kies Feest</a>
+          <a class="button" href="#bestellen" data-pakket="feest">Bestel Feest</a>
         </article>
         <article class="plan quiet">
           <h3>Jaarabonnement</h3>
@@ -220,7 +225,7 @@
             <li>Medewerkers met eigen toegang</li>
             <li>Alles uit het pakket Feest</li>
           </ul>
-          <a class="button" href="#aanvragen" data-pakket="Jaarabonnement">Vraag een gesprek aan</a>
+          <a class="button" href="#gesprek">Vraag een gesprek aan</a>
         </article>
       </div>
       <p class="plans-note">Prijzen inclusief btw. Het jaarabonnement is voor feesten die je zelf organiseert of in je eigen zaal laat doorgaan. Feesten doorverkopen of uitlenen aan andere zalen of organisatoren mag niet.</p>
@@ -235,31 +240,48 @@
       <details><summary>Ik ben DJ of heb een feestzaal. Hoe werkt het jaarabonnement?</summary><p>Je maakt zelf een feest aan voor elk feest dat je doet of in je zaal laat doorgaan. Je klanten krijgen hun eigen QR-code en album. Je kunt het tonen als extra in je aanbod. Laat je gegevens na, dan bellen we je.</p></details>
     </section>
 
-    <section aria-labelledby="aanvragen-t">
-      <div class="request" id="aanvragen">
-        <h3 id="aanvragen-t">Vraag je feest aan</h3>
-        <p>Laat je gegevens na. We maken je feest samen klaar en sturen je de betaallink.</p>
-        <form id="feestForm" novalidate>
+    <section aria-labelledby="bestellen-t">
+      <div class="request" id="bestellen">
+        <h3 id="bestellen-t">Bestel je feest</h3>
+        <p>Vul je feest in en betaal meteen. Na de betaling zie je direct je links: één voor je gasten en één voor jezelf als organisator. Je krijgt ze ook per mail van <a href="mailto:info@makingmemories.be">info@makingmemories.be</a>.</p>
+        <form id="bestelForm" novalidate>
+          <fieldset class="pakket-keuze">
+            <legend>Pakket</legend>
+            <label><input type="radio" name="pakket" value="thuisfeest"> Thuisfeest <b>€ 14,95</b></label>
+            <label><input type="radio" name="pakket" value="feest" checked> Feest <b>€ 39</b></label>
+          </fieldset>
+          <label>Naam van je feest<input name="feest" type="text" maxlength="80" required placeholder="Bv. Feest voor Rita 70"></label>
+          <div class="field-row">
+            <label>Datum<input name="datum" type="date" required></label>
+            <label>Begint om<input name="uur" type="time" value="19:00" required></label>
+          </div>
+          <div class="field-row">
+            <label>Je naam<input name="naam" type="text" autocomplete="name" maxlength="80" required></label>
+            <label>E-mailadres<input name="email" type="email" autocomplete="email" maxlength="200" required></label>
+          </div>
+          <label class="check"><input type="checkbox" name="akkoord" required><span>Ik ga akkoord met de <a href="../voorwaarden.html">voorwaarden</a>. Mijn feest wordt meteen klaargezet; daardoor vervalt het herroepingsrecht zodra ik de links ontvang.</span></label>
+          <label class="hp" aria-hidden="true">Laat dit leeg<input name="website" type="text" tabindex="-1" autocomplete="off"></label>
+          <button class="button" type="submit">Betalen met Mollie</button>
+          <p class="form-status" role="status" aria-live="polite"></p>
+          <p class="form-note">Betalen kan met Bancontact, iDEAL, Payconiq of kaart, via Mollie. Prijzen inclusief btw. Je factuur komt per mail. We bewaren je naam en e-mailadres voor je bestelling en je factuur (<a href="../privacy.html">privacyverklaring</a>).</p>
+        </form>
+      </div>
+    </section>
+
+    <section aria-labelledby="gesprek-t">
+      <div class="request" id="gesprek">
+        <h3 id="gesprek-t">Jaarabonnement voor zalen, DJ's en organisatoren</h3>
+        <p>Laat je gegevens na, dan bellen of mailen we je om alles samen klaar te zetten.</p>
+        <form id="gesprekForm" novalidate>
           <div class="field-row">
             <label>Naam<input name="naam" type="text" autocomplete="name" maxlength="80" required></label>
             <label>E-mailadres<input name="email" type="email" autocomplete="email" maxlength="200" required></label>
           </div>
-          <div class="field-row">
-            <label>Pakket
-              <select name="pakket" required>
-                <option value="Thuisfeest">Thuisfeest (€ 14,95)</option>
-                <option value="Feest" selected>Feest (€ 39)</option>
-                <option value="Jaarabonnement">Jaarabonnement (vanaf € 29/maand)</option>
-              </select>
-            </label>
-            <label>Datum van het feest <span class="optional">(mag leeg)</span><input name="datum" type="date"></label>
-          </div>
-          <label>Wat voor feest of zaak? <span class="optional">(mag leeg)</span><input name="wat" type="text" maxlength="120" placeholder="Bv. 50ste verjaardag, bruiloft, DJ, feestzaal"></label>
+          <label>Zaak of bedrijf <span class="optional">(mag leeg)</span><input name="wat" type="text" maxlength="120" placeholder="Bv. Feestzaal De Linde, DJ Tom"></label>
           <label>Bericht <span class="optional">(mag leeg)</span><textarea name="bericht" rows="3" maxlength="700"></textarea></label>
           <label class="hp" aria-hidden="true">Laat dit leeg<input name="website" type="text" tabindex="-1" autocomplete="off"></label>
-          <button class="button" type="submit">Feest aanvragen</button>
+          <button class="button" type="submit">Gesprek aanvragen</button>
           <p class="form-status" role="status" aria-live="polite"></p>
-          <p class="form-note">We gebruiken je gegevens alleen om je feest klaar te zetten en wissen je aanvraag na hoogstens 180 dagen (<a href="../privacy.html">privacyverklaring</a>). Liever mailen? Dat kan op <a href="mailto:info@makingmemories.be?subject=Feest%20aanvragen">info@makingmemories.be</a>.</p>
         </form>
       </div>
     </section>
@@ -277,42 +299,54 @@
 </div>
 <script>
 (function(){
-  var form=document.getElementById('feestForm');
-  if(!form)return;
-  // Knoppen in de prijskaarten zetten het gekozen pakket in het formulier.
+  // Prijskaarten kiezen het pakket in het bestelformulier.
+  var bestel=document.getElementById('bestelForm');
   Array.prototype.forEach.call(document.querySelectorAll('[data-pakket]'),function(a){
-    a.addEventListener('click',function(){form.pakket.value=a.getAttribute('data-pakket');});
+    a.addEventListener('click',function(){var r=bestel.querySelector('input[name=pakket][value="'+a.getAttribute('data-pakket')+'"]');if(r)r.checked=true;});
   });
-  // Zelfde functie als het uitnodigingsformulier op de startpagina; op localhost naar de testdatabase.
   var lokaal=location.hostname==='localhost';
-  var adres='https://'+(lokaal?'whebrmytlidfzvcickdh':'hktczewqpevvgxqcswov')+'.supabase.co/functions/v1/uitnodiging-aanvraag';
+  var basis='https://'+(lokaal?'whebrmytlidfzvcickdh':'hktczewqpevvgxqcswov')+'.supabase.co/functions/v1/';
   // Openbare sleutel (dezelfde als in de app), geen geheim.
   var sleutel=lokaal?'sb_publishable_LPdEmMiecZRwwuV8b0Ai5A_cKDsCzK-':'sb_publishable_YmfLKfk25pED0oqoTbSYPA_LWhZIuZC';
   var geladen=Date.now();
-  var status=form.querySelector('.form-status');
-  var knop=form.querySelector('button');
-  function meld(tekst,soort){status.textContent=tekst;status.className='form-status '+(soort||'');}
-  form.addEventListener('submit',function(e){
-    e.preventDefault();
-    var naam=form.naam.value.trim(), email=form.email.value.trim();
-    if(!naam){meld('Vul je naam in.','err');form.naam.focus();return;}
-    if(!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)){meld('Dit e-mailadres lijkt niet te kloppen.','err');form.email.focus();return;}
-    // Pakket, datum en soort feest gaan mee in het bericht: database en mailfunctie blijven gelijk.
-    var regels=['FEEST – pakket: '+form.pakket.value];
-    if(form.datum.value)regels.push('Datum: '+form.datum.value);
-    if(form.wat.value.trim())regels.push('Wat: '+form.wat.value.trim());
-    var extra=form.bericht.value.trim();
-    var bericht=(regels.join('\n')+(extra?'\n\n'+extra:'')).slice(0,1000);
-    knop.disabled=true;meld('Even geduld…');
-    fetch(adres,{method:'POST',headers:{'Content-Type':'application/json','apikey':sleutel},body:JSON.stringify({
-      naam:naam,email:email,soort:'',bericht:bericht,
-      website:form.website.value,ingevuld_ms:Date.now()-geladen
-    })}).then(function(r){return r.json().catch(function(){return {};}).then(function(d){return {ok:r.ok&&d.ok,fout:d.fout};});})
-    .then(function(r){
-      if(r.ok){form.reset();meld('Bedankt! Je aanvraag is goed aangekomen. We nemen snel contact op.','ok');}
-      else{meld(r.fout||'Versturen lukte niet. Mail ons gerust op info@makingmemories.be.','err');}
-    })
-    .catch(function(){meld('Versturen lukte niet. Controleer je verbinding, of mail ons op info@makingmemories.be.','err');})
+  function meld(f,tekst,soort){var s=f.querySelector('.form-status');s.textContent=tekst;s.className='form-status '+(soort||'');}
+  function post(functie,data){
+    return fetch(basis+functie,{method:'POST',headers:{'Content-Type':'application/json','apikey':sleutel},body:JSON.stringify(data)})
+      .then(function(r){return r.json().catch(function(){return {};}).then(function(d){d.ok=r.ok&&d.ok!==false;return d;});});
+  }
+  var emailOk=function(e){return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(e);};
+
+  // Bestellen: de functie feest-bestellen (nog te bouwen, docs/ontwerp-feest-bestellen.md) maakt de Mollie-betaling
+  // en geeft checkout_url terug. Het bedrag komt nooit uit deze pagina, alleen de pakketnaam.
+  bestel.addEventListener('submit',function(e){
+    e.preventDefault();var f=bestel,knop=f.querySelector('button');
+    var d={pakket:(f.querySelector('input[name=pakket]:checked')||{}).value,feest:f.feest.value.trim(),datum:f.datum.value,uur:f.uur.value,
+      naam:f.naam.value.trim(),email:f.email.value.trim(),website:f.website.value,ingevuld_ms:Date.now()-geladen};
+    if(!d.feest){meld(f,'Geef je feest een naam.','err');f.feest.focus();return;}
+    if(!d.datum){meld(f,'Kies de datum van je feest.','err');f.datum.focus();return;}
+    if(!d.naam){meld(f,'Vul je naam in.','err');f.naam.focus();return;}
+    if(!emailOk(d.email)){meld(f,'Dit e-mailadres lijkt niet te kloppen.','err');f.email.focus();return;}
+    if(!f.akkoord.checked){meld(f,'Vink de voorwaarden aan om verder te gaan.','err');f.akkoord.focus();return;}
+    knop.disabled=true;meld(f,'Even geduld, we openen Mollie…');
+    post('feest-bestellen',d).then(function(r){
+      if(r.ok&&r.checkout_url&&/^https:\/\/www\.mollie\.com\//.test(r.checkout_url)){location.href=r.checkout_url;return;}
+      meld(f,r.fout||'Bestellen lukt nog niet online. Mail ons op info@makingmemories.be, dan zetten we je feest met de hand klaar.','err');knop.disabled=false;
+    }).catch(function(){meld(f,'Bestellen lukt nog niet online. Mail ons op info@makingmemories.be, dan zetten we je feest met de hand klaar.','err');knop.disabled=false;});
+  });
+
+  // Jaarabonnement: zelfde aanvraagfunctie als de startpagina.
+  var gesprek=document.getElementById('gesprekForm');
+  gesprek.addEventListener('submit',function(e){
+    e.preventDefault();var f=gesprek,knop=f.querySelector('button');
+    var naam=f.naam.value.trim(),email=f.email.value.trim();
+    if(!naam){meld(f,'Vul je naam in.','err');f.naam.focus();return;}
+    if(!emailOk(email)){meld(f,'Dit e-mailadres lijkt niet te kloppen.','err');f.email.focus();return;}
+    var regels=['FEEST – jaarabonnement'];if(f.wat.value.trim())regels.push('Zaak: '+f.wat.value.trim());
+    var extra=f.bericht.value.trim();var bericht=(regels.join('\n')+(extra?'\n\n'+extra:'')).slice(0,1000);
+    knop.disabled=true;meld(f,'Even geduld…');
+    post('uitnodiging-aanvraag',{naam:naam,email:email,soort:'',bericht:bericht,website:f.website.value,ingevuld_ms:Date.now()-geladen})
+    .then(function(r){if(r.ok){f.reset();meld(f,'Bedankt! We nemen snel contact op.','ok');}else meld(f,r.fout||'Versturen lukte niet. Mail ons gerust op info@makingmemories.be.','err');})
+    .catch(function(){meld(f,'Versturen lukte niet. Mail ons op info@makingmemories.be.','err');})
     .then(function(){knop.disabled=false;});
   });
 })();
