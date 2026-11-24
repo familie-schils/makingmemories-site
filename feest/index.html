@@ -86,6 +86,15 @@
 .fe-faq p{margin:.5rem 0 0;color:var(--muted)}
 
 .fe .request{border-color:var(--feest-line)}
+.fe-band{margin:0}
+.fe-band img,.fe-fotos img{width:100%;height:auto;display:block;border-radius:1rem}
+.fe-band img{aspect-ratio:21/9;object-fit:cover}
+.fe-fotos{display:grid;gap:1.25rem}
+.fe-fotos figure{margin:0}
+.fe-fotos img{aspect-ratio:3/2;object-fit:cover}
+.fe-fotos figcaption{font-size:.95rem;color:var(--muted);font-style:italic;margin-top:.5rem}
+@media (min-width:52rem){.fe-fotos{grid-template-columns:repeat(3,1fr)}}
+.ai-note{font-size:.85rem;color:var(--muted)}
 .fe .request + .request,.fe section + section .request{margin-top:0}
 .pakket-keuze{border:1px solid var(--feest-line);border-radius:.6rem;padding:.6rem 1rem;margin:0 0 1rem;display:flex;flex-wrap:wrap;gap:.4rem 1.5rem}
 .pakket-keuze legend{font-weight:600;padding:0 .3rem}
@@ -151,6 +160,8 @@
       </figure>
     </div>
 
+    <figure class="fe-band"><img src="img/zaal.jpg" alt="Gasten aan lange tafels in een feestzaal, enkelen fotograferen de dansvloer met hun gsm" width="1400" height="939" loading="lazy"></figure>
+
     <section id="hoe" aria-labelledby="hoe-t">
       <h2 id="hoe-t">Zo werkt het</h2>
       <ol class="fe-steps">
@@ -170,6 +181,14 @@
         <li><h3>Drukkwaliteit</h3><p>Foto's worden bewaard in een kwaliteit die goed genoeg is voor een fotoboek of een afdruk aan de muur.</p></li>
         <li><h3>Privé en in Europa</h3><p>Geen openbaar album, geen reclame, geen volgcookies. De gegevens staan op servers in de Europese Unie.</p></li>
       </ul>
+    </section>
+
+    <section aria-label="Voorbeelden">
+      <div class="fe-fotos">
+        <figure><img src="img/thuis.jpg" alt="Een 70ste verjaardag thuis aan tafel, een kleinzoon neemt een foto" width="1400" height="939" loading="lazy"><figcaption>Een verjaardag thuis: de foto's van de kleinkinderen staan meteen bij die van oma.</figcaption></figure>
+        <figure><img src="img/bruiloft.jpg" alt="Gasten op een bruiloft in een tuin fotograferen het dansende koppel" width="1400" height="939" loading="lazy"><figcaption>Een bruiloft: honderd gsm's, één album.</figcaption></figure>
+        <figure><img src="img/scherm.jpg" alt="Gasten wijzen naar een tv-scherm met foto's van het feest" width="1400" height="939" loading="lazy"><figcaption>Het fotoscherm: nieuwe foto's verschijnen tijdens het feest op tv of beamer.</figcaption></figure>
+      </div>
     </section>
 
     <section aria-labelledby="wie">
@@ -295,6 +314,7 @@
       <a href="../">Making Memories voor reizen</a>
     </nav>
     <p>© 2026 Making Memories</p>
+    <p class="ai-note">Foto's op deze pagina zijn gemaakt met AI.</p>
   </footer>
 </div>
 <script>
