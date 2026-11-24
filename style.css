@@ -225,3 +225,10 @@ p{margin:0 0 1rem;max-width:var(--measure)}
 .lang a{color:var(--ink);background:var(--sheet)}
 .lang a:hover{border-color:var(--forest)}
 .lang span{background:var(--forest);border-color:var(--forest);color:#fff}
+
+/* Feestenpagina */
+.intro{padding:2.5rem 0 3.5rem}
+.intro .lead{margin-bottom:1.5rem}
+.promo-link{background:var(--sheet);border:1px solid var(--line);border-radius:.9rem;padding:1.3rem 1.5rem;margin-top:1.5rem}
+.promo-link h3{font-size:1.15rem;margin:0 0 .3rem}
+.promo-link p{margin:0}
