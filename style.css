@@ -232,3 +232,17 @@ p{margin:0 0 1rem;max-width:var(--measure)}
 .promo-link{background:var(--sheet);border:1px solid var(--line);border-radius:.9rem;padding:1.3rem 1.5rem;margin-top:1.5rem}
 .promo-link h3{font-size:1.15rem;margin:0 0 .3rem}
 .promo-link p{margin:0}
+
+/* Feestenpagina: tegels en aanvraagformulier */
+section[id]{scroll-margin-top:.5rem}
+.keuzes{display:grid;grid-template-columns:1fr;gap:1.25rem}
+@media (min-width:52rem){.keuzes{grid-template-columns:1fr 1fr}}
+.keuze{background:var(--sheet);border:1px solid var(--line);border-radius:.9rem;padding:1.4rem 1.5rem;display:flex;flex-direction:column;align-items:flex-start}
+.keuze h3{margin:0 0 .2rem;font-size:1.3rem}
+.keuze .prijs{font-size:1.9rem;font-weight:700;margin:0 0 .6rem;font-variant-numeric:lining-nums}
+.keuze ul{padding-left:1.1rem;margin:0 0 1.2rem;color:var(--muted);font-size:1rem}
+.keuze .button{margin-top:auto}
+#aanvragen .request{margin-top:1.5rem}
+#aanvragen .field-row{align-items:end}
+#aanvragen input,#aanvragen select{min-width:0;height:3rem}
+#aanvragen .hp input{height:auto}

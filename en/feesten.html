@@ -27,10 +27,78 @@
       <h1>All the photos of the party, in one album.</h1>
       <p class="lead">After a party, the best photos are scattered across dozens of phones. With Making Memories they end up together in one shared album. Guests join with a link or a QR code: no app and no account needed.</p>
       <div class="actions">
-        <a class="button" href="#venues">For venues, photographers and DJs</a>
+        <a class="button" href="#aanvragen" data-ben="particulier">Request for free (until 30 December)</a>
         <a class="quiet-link" href="#guests">I'm a guest</a>
+        <a class="quiet-link" href="#venues">For venues, photographers and DJs</a>
       </div>
     </div>
+
+    <section id="eigen" aria-labelledby="eigen-kop">
+      <h2 id="eigen-kop">Throwing a party yourself? Here's how.</h2>
+      <div class="keuzes">
+        <div class="keuze">
+          <h3>Free until 30-12-2026</h3>
+          <p class="prijs">€ 0</p>
+          <ul>
+            <li>For a party up to and including 30 December 2026</li>
+            <li>You request it, we set it up (usually within 2 days)</li>
+            <li>Up to 30 guests</li>
+            <li>The link is sent to your email address</li>
+          </ul>
+          <a class="button" href="#aanvragen" data-ben="particulier">Request for free</a>
+        </div>
+        <!-- Placeholder: the 'Buy your party' tile (EUR 4.95) goes here once buying on the site has been built. Remove the free tile then (valid until 30-12-2026). -->
+      </div>
+      <p style="margin-top:1.5rem">You get a poster with a QR code, a photo screen for the TV and a photo book as a PDF. Photos can be added until 24 hours after the party ends. Everything is deleted 30 days after the party.</p>
+    </section>
+
+    <section id="aanvragen" aria-labelledby="aanvraag-kop">
+      <h2 id="aanvraag-kop">Request your invitation for parties</h2>
+      <p>Do you run a venue, are you a photographer or DJ, or are you throwing a party yourself? Let us know. We are deliberately starting small and reply within a few days.</p>
+      <noscript><p>The form needs JavaScript. Email us at <a href="mailto:info@makingmemories.be?subject=Party%20request">info@makingmemories.be</a>.</p></noscript>
+      <div class="request">
+        <form id="feestForm" method="post" novalidate>
+          <label>I am
+            <select name="ben" required>
+              <option value="particulier">Someone throwing a party</option>
+              <option value="vereniging">A club, school or association</option>
+              <option value="zaal">A party venue</option>
+              <option value="fotograaf">A photographer or DJ</option>
+            </select>
+          </label>
+          <div class="field-row">
+            <label>Name<input name="naam" type="text" autocomplete="name" maxlength="80" required></label>
+            <label>Email address<input name="email" type="email" autocomplete="email" maxlength="200" required></label>
+          </div>
+          <label>Name of your business or club <span class="optional">(optional)</span><input name="zaak" type="text" autocomplete="organization" maxlength="120"></label>
+          <div class="field-row">
+            <label>Kind of party <span class="optional">(optional)</span>
+              <select name="feestsoort">
+                <option value="">Choose…</option>
+                <option value="Sinterklaas">Sinterklaas</option>
+                <option value="Kerst">Christmas</option>
+                <option value="Verjaardag">Birthday</option>
+                <option value="Huwelijk">Wedding</option>
+                <option value="Communie">First communion</option>
+                <option value="Babyborrel">Baby shower</option>
+                <option value="Bedrijfsfeest">Company party</option>
+                <option value="Ander">Other</option>
+              </select>
+            </label>
+            <label>Date <span class="optional">(optional)</span><input name="datum" type="date" max="2026-12-30"></label>
+          </div>
+          <div class="field-row">
+            <label>Number of guests <span class="optional" data-grens>(at most 30)</span><input name="gasten" type="number" inputmode="numeric" min="1" max="30" step="1" value="30"></label>
+            <label>How did you hear about us? <span class="optional">(optional)</span><input name="via" type="text" maxlength="120"></label>
+          </div>
+          <label>Message <span class="optional">(optional)</span><textarea name="bericht" rows="3" maxlength="600"></textarea></label>
+          <label class="hp" aria-hidden="true">Leave this empty<input name="website" type="text" tabindex="-1" autocomplete="off"></label>
+          <button class="button" type="submit">Request an invitation</button>
+          <p class="form-status" role="status" aria-live="polite"></p>
+          <p class="form-note">We use your details only to reply to you and delete your request after 180 days at the most (<a href="privacy.html">privacy statement</a>). Prefer to email? You can reach us at <a href="mailto:info@makingmemories.be?subject=Party%20request">info@makingmemories.be</a>.</p>
+        </form>
+      </div>
+    </section>
 
     <section id="guests" aria-labelledby="guest-heading">
       <h2 id="guest-heading">For guests: how to join</h2>
@@ -94,9 +162,9 @@
       <p style="margin-top:1rem;color:var(--muted)">The number of guests per party doesn't matter. Guests never pay.</p>
 
       <div class="actions" style="margin-top:1.5rem">
-        <a class="button" href="index.html#aanvragen">Request</a>
+        <a class="button" href="#aanvragen" data-ben="zaal">Request</a>
       </div>
-      <p style="color:var(--muted);max-width:var(--measure)">Making Memories deliberately grows in a small circle, so you first request an invitation. Please mention in the message that you have a business for parties, so we know what it's about.</p>
+      <p style="color:var(--muted);max-width:var(--measure)">Making Memories deliberately grows in a small circle, so you first request an invitation. Choose in the form that you have a business, so we know what it's about.</p>
     </section>
   </main>
 
@@ -111,5 +179,6 @@
     <p>© 2026 Making Memories</p>
   </footer>
 </div>
+<script src="../feestformulier.js"></script>
 </body>
 </html>
