@@ -1,0 +1,81 @@
+<!doctype html>
+<html lang="nl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex">
+<meta name="referrer" content="no-referrer">
+<title>Making Memories – je bestelling</title>
+<meta name="theme-color" content="#20252b">
+<link rel="icon" type="image/svg+xml" href="icon.svg">
+<link rel="apple-touch-icon" href="icon-180.png">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<div class="wrap">
+  <header class="site-head">
+    <a class="brand" href="./"><img src="icon.svg" alt="" width="40" height="40">Making Memories</a>
+    <div class="lang" role="group" aria-label="Taal"><span aria-current="true" lang="nl">NLD</span><a href="en/feesten-bedankt.html" hreflang="en" lang="en" aria-label="English" data-taal>GBR</a></div>
+    <a class="head-link" href="https://app.makingmemories.be/">Inloggen</a>
+  </header>
+
+  <main>
+    <div class="intro">
+      <p class="kicker">Feest kopen</p>
+      <h1 class="bedankt-kop">Je bestelling</h1>
+      <noscript><p>Je mail komt binnen enkele minuten. Niets gekregen? Kijk in je spam of mail <a href="mailto:info@makingmemories.be">info@makingmemories.be</a>.</p></noscript>
+      <div class="promo-link bedankt" id="bedankt" role="status" aria-live="polite">
+      <div data-stand="laden" hidden>
+        <p>We kijken je betaling na…</p>
+      </div>
+      <div data-stand="betaald" hidden>
+        <h2>Betaald. Dank je wel.</h2>
+      </div>
+      <div data-stand="bezig" hidden>
+        <h2>Je betaling is nog bezig.</h2>
+      </div>
+      <div data-stand="betaald bezig" hidden>
+        <p>Je mail komt binnen enkele minuten. Niets gekregen? Kijk in je spam of mail <a href="mailto:info@makingmemories.be">info@makingmemories.be</a>.</p>
+      </div>
+      <div data-stand="mislukt" hidden>
+        <h2>De betaling is niet gelukt.</h2>
+        <p>Er is geen feest aangemaakt. Je kunt het opnieuw proberen.</p>
+        <p><a href="feesten.html#kopen">Terug naar het bestelformulier</a></p>
+      </div>
+      <div data-stand="te_laat" hidden>
+        <h2>Je bestelling is niet gelukt.</h2>
+        <p>De betaling kwam na het einde van het feest, dus er is geen feest aangemaakt. Mail ons op <a href="mailto:info@makingmemories.be">info@makingmemories.be</a>.</p>
+      </div>
+      <div data-stand="nakijken" hidden>
+        <h2>Je bestelling is niet gelukt.</h2>
+        <p>Er is geen feest aangemaakt. Bestel niet opnieuw, maar mail ons op <a href="mailto:info@makingmemories.be">info@makingmemories.be</a>.</p>
+      </div>
+      <div data-stand="onbekend" hidden>
+        <h2>We vinden geen bestelling.</h2>
+        <p>Heb je betaald en krijg je geen mail? Mail ons op <a href="mailto:info@makingmemories.be">info@makingmemories.be</a>.</p>
+      </div>
+      <div data-stand="geenverbinding" hidden>
+        <h2>We kunnen de stand nu niet ophalen.</h2>
+        <p>Controleer je verbinding en kijk opnieuw. Vragen? Mail ons op <a href="mailto:info@makingmemories.be">info@makingmemories.be</a>.</p>
+      </div>
+      </div>
+      <div class="actions" style="margin-top:1.5rem">
+        <button class="button" type="button" id="opnieuw" hidden>Opnieuw kijken</button>
+      </div>
+    </div>
+  </main>
+
+  <footer class="site-foot">
+    <nav aria-label="Voettekst">
+      <a href="./">Reizen</a>
+      <a href="feesten.html">Feesten</a>
+      <a href="mailto:info@makingmemories.be">info@makingmemories.be</a>
+      <a href="privacy.html">Privacyverklaring</a>
+      <a href="voorwaarden.html">Voorwaarden</a>
+    </nav>
+    <p>© 2026 Making Memories</p>
+  </footer>
+</div>
+<script src="feestbedankt.js"></script>
+</body>
+</html>

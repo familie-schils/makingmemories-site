@@ -27,6 +27,7 @@
       <h1>Alle foto's van het feest, in één album.</h1>
       <p class="lead">Na een feest staan de mooiste foto's verspreid over tientallen telefoons. Met Making Memories komen ze samen in één gedeeld album. Gasten doen mee met een link of een QR-code: geen app en geen account nodig.</p>
       <div class="actions">
+        <a class="button" href="#kopen" data-koop="open" hidden>Koop je feest (€ <span data-prijs>4,95</span>)</a>
         <a class="button" href="#aanvragen" data-ben="particulier">Gratis aanvragen (tot 30 december)</a>
         <a class="quiet-link" href="#gasten">Ik ben gast</a>
         <a class="quiet-link" href="#zaken">Voor feestzalen, fotografen en DJ's</a>
@@ -47,9 +48,26 @@
           </ul>
           <a class="button" href="#aanvragen" data-ben="particulier">Gratis aanvragen</a>
         </div>
-        <!-- Plaatshouder: de tegel 'Koop je feest' (4,95 euro) komt hier zodra kopen via de site gebouwd is. Haal dan ook de gratis tegel weg (geldt tot 30-12-2026). -->
+        <div class="keuze">
+          <h3>Vanaf 31-12-2026</h3>
+          <div data-koop="dicht">
+            <p class="prijs">Binnenkort</p>
+            <p class="keuze-tekst">Straks koop je hier zelf je feest. Nu kan dat nog niet.</p>
+          </div>
+          <div data-koop="open" hidden>
+            <p class="prijs">€ <span data-prijs>4,95</span></p>
+            <ul>
+              <li>Voor een feest vanaf 31 december 2026</li>
+              <li>Je koopt het zelf en krijgt een mail met je link</li>
+              <li>Tot <span data-gasten>50</span> gasten</li>
+              <li>Foto's toevoegen vanaf <span data-dagen>3</span> dagen voor het feest</li>
+              <li>Te koop tot een jaar vooruit</li>
+            </ul>
+          </div>
+          <a class="button" href="#kopen" data-koop="open" hidden>Koop je feest (€ <span data-prijs>4,95</span>)</a>
+        </div>
       </div>
-      <p style="margin-top:1.5rem">Je krijgt een affiche met QR-code, een fotoscherm voor op de tv en een fotoboek als PDF. Foto's toevoegen kan tot 24 uur na het einde. Alles wordt 30 dagen na het feest gewist.</p>
+      <p style="margin-top:1.5rem">Bij allebei krijg je een affiche met QR-code, een fotoscherm voor op de tv en een fotoboek als PDF. Foto's toevoegen kan tot 24 uur na het einde. Alles wordt 30 dagen na het feest gewist.</p>
     </section>
 
     <section id="aanvragen" aria-labelledby="aanvraag-kop">
@@ -96,6 +114,61 @@
           <button class="button" type="submit">Uitnodiging aanvragen</button>
           <p class="form-status" role="status" aria-live="polite"></p>
           <p class="form-note">We gebruiken je gegevens alleen om je te antwoorden en wissen je aanvraag na hoogstens 180 dagen (<a href="privacy.html">privacyverklaring</a>). Liever mailen? Dat kan op <a href="mailto:info@makingmemories.be?subject=Aanvraag%20feest">info@makingmemories.be</a>.</p>
+        </form>
+      </div>
+    </section>
+
+    <section id="kopen" aria-labelledby="koop-kop" data-koop="open" hidden>
+      <h2 id="koop-kop">Koop je feest</h2>
+      <p>Voor een feest vanaf 31 december 2026. Je betaalt via Mollie. Daarna krijg je een mail met je persoonlijke link als feestorganisator en de QR-code voor je gasten.</p>
+      <noscript><p>Kopen werkt niet zonder JavaScript.</p></noscript>
+      <div class="request">
+        <form id="koopForm" method="post" novalidate>
+          <h3>Je feest</h3>
+          <label>Naam van het feest<input name="feestnaam" type="text" maxlength="80" placeholder="Bv. Oudjaar bij de familie Peeters" required></label>
+          <div class="field-row paar">
+            <label>Begindatum<input name="begin_datum" type="date" required></label>
+            <label>Beginuur<input name="begin_uur" type="time" value="20:00" required></label>
+          </div>
+          <div class="field-row paar">
+            <label>Einddatum<input name="eind_datum" type="date" required></label>
+            <label>Einduur<input name="eind_uur" type="time" required></label>
+          </div>
+          <p class="form-note">We stellen zes uur later voor. Je kunt het einde verschuiven, tot hoogstens 24 uur na het begin.</p>
+          <p class="form-note"><strong>Foto's toevoegen kan pas vanaf <span data-dagen>3</span> dagen voor het feest.</strong></p>
+          <p class="form-note" id="koopDuur" aria-live="polite"></p>
+          <div class="field-row">
+            <label>E-mailadres<input name="email" type="email" autocomplete="email" maxlength="200" required></label>
+            <label>E-mailadres (nog eens)<input name="email2" type="email" autocomplete="email" maxlength="200" required></label>
+          </div>
+          <p class="form-note">Naar dit adres gaan je link en je factuur.</p>
+          <h3>Voor de factuur</h3>
+          <div class="field-row">
+            <label>Voornaam<input name="voornaam" type="text" autocomplete="given-name" maxlength="60" required></label>
+            <label>Familienaam<input name="familienaam" type="text" autocomplete="family-name" maxlength="60" required></label>
+          </div>
+          <label>Straat en nummer<input name="straat" type="text" autocomplete="street-address" maxlength="150" required></label>
+          <div class="field-row">
+            <label>Postcode<input name="postcode" type="text" autocomplete="postal-code" maxlength="10" required></label>
+            <label>Gemeente<input name="gemeente" type="text" autocomplete="address-level2" maxlength="80" required></label>
+          </div>
+          <label>Land
+            <select name="land" autocomplete="country">
+              <option value="BE">België</option>
+              <option value="NL">Nederland</option>
+              <option value="DE">Duitsland</option>
+              <option value="LU">Luxemburg</option>
+              <option value="FR">Frankrijk</option>
+            </select>
+          </label>
+          <label class="vink"><input name="akkoord" type="checkbox" required><span>Ik ben 18 of ouder, ga akkoord met de <a href="voorwaarden.html" target="_blank" rel="noopener">voorwaarden</a> en las de <a href="privacy.html" target="_blank" rel="noopener">privacyverklaring</a>.</span></label>
+          <p class="herroep" id="herroep"><strong>Geen herroepingsrecht.</strong> Je koopt een dienst voor een vaste datum. Je kunt de aankoop daarom niet binnen 14 dagen herroepen en je krijgt geen geld terug als je annuleert of het feest niet doorgaat. Kan het door een fout bij ons niet doorgaan, dan krijg je je geld wel terug.</p>
+          <label class="vink"><input name="geen_herroeping" type="checkbox" aria-describedby="herroep" required><span>Ik begrijp dat ik geen herroepingsrecht heb.</span></label>
+          <label class="hp" aria-hidden="true">Laat dit leeg<input name="website" type="text" tabindex="-1" autocomplete="off"></label>
+          <button class="button koop" type="submit"><span>Bestellen en betalen: € <span data-prijs>4,95</span></span><small>Geen herroepingsrecht, geen geld terug</small></button>
+          <p class="form-status" role="status" aria-live="polite"></p>
+          <!-- Voor de verkoop opengaat: volledig adres en ondernemingsnummer van de verkoper invullen. -->
+          <p class="form-note">Prijs: € <span data-prijs>4,95</span>, geen btw (bijzondere vrijstellingsregeling kleine ondernemingen). Verkoper: Matthias Schils, handelsnaam Making Memories, Lanaken, <a href="mailto:info@makingmemories.be">info@makingmemories.be</a>.</p>
         </form>
       </div>
     </section>
@@ -180,5 +253,6 @@
   </footer>
 </div>
 <script src="feestformulier.js"></script>
+<script src="feestkoop.js"></script>
 </body>
 </html>
