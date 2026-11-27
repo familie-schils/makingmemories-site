@@ -27,6 +27,7 @@
       <h1>All the photos of the party, in one album.</h1>
       <p class="lead">After a party, the best photos are scattered across dozens of phones. With Making Memories they end up together in one shared album. Guests join with a link or a QR code: no app and no account needed.</p>
       <div class="actions">
+        <a class="button" href="#kopen" data-koop="open" hidden>Buy your party (€ <span data-prijs>4.95</span>)</a>
         <a class="button" href="#aanvragen" data-ben="particulier">Request for free (until 30 December)</a>
         <a class="quiet-link" href="#guests">I'm a guest</a>
         <a class="quiet-link" href="#venues">For venues, photographers and DJs</a>
@@ -47,9 +48,26 @@
           </ul>
           <a class="button" href="#aanvragen" data-ben="particulier">Request for free</a>
         </div>
-        <!-- Placeholder: the 'Buy your party' tile (EUR 4.95) goes here once buying on the site has been built. Remove the free tile then (valid until 30-12-2026). -->
+        <div class="keuze">
+          <h3>From 31-12-2026</h3>
+          <div data-koop="dicht">
+            <p class="prijs">Coming soon</p>
+            <p class="keuze-tekst">Soon you can buy your party here yourself. That isn't possible yet.</p>
+          </div>
+          <div data-koop="open" hidden>
+            <p class="prijs">€ <span data-prijs>4.95</span></p>
+            <ul>
+              <li>For a party from 31 December 2026</li>
+              <li>You buy it yourself and get an email with your link</li>
+              <li>Up to <span data-gasten>50</span> guests</li>
+              <li>Photos can be added from 3 days before the party</li>
+              <li>On sale up to a year ahead</li>
+            </ul>
+          </div>
+          <a class="button" href="#kopen" data-koop="open" hidden>Buy your party (€ <span data-prijs>4.95</span>)</a>
+        </div>
       </div>
-      <p style="margin-top:1.5rem">You get a poster with a QR code, a photo screen for the TV and a photo book as a PDF. Photos can be added until 24 hours after the party ends. Everything is deleted 30 days after the party.</p>
+      <p style="margin-top:1.5rem">With both you get a poster with a QR code, a photo screen for the TV and a photo book as a PDF. Photos can be added until 24 hours after the party ends. Everything is deleted 30 days after the party.</p>
     </section>
 
     <section id="aanvragen" aria-labelledby="aanvraag-kop">
@@ -96,6 +114,60 @@
           <button class="button" type="submit">Request an invitation</button>
           <p class="form-status" role="status" aria-live="polite"></p>
           <p class="form-note">We use your details only to reply to you and delete your request after 180 days at the most (<a href="privacy.html">privacy statement</a>). Prefer to email? You can reach us at <a href="mailto:info@makingmemories.be?subject=Party%20request">info@makingmemories.be</a>.</p>
+        </form>
+      </div>
+    </section>
+
+    <section id="kopen" aria-labelledby="koop-kop" data-koop="open" hidden>
+      <h2 id="koop-kop">Buy your party</h2>
+      <p>For a party from 31 December 2026. You pay through Mollie. After that you get an email (in Dutch) with your personal link as party host and the QR code for your guests.</p>
+      <noscript><p>Buying needs JavaScript.</p></noscript>
+      <div class="request">
+        <form id="koopForm" method="post" novalidate>
+          <h3>Your party</h3>
+          <label>Name of the party<input name="feestnaam" type="text" maxlength="80" placeholder="E.g. New Year's Eve at the Peeters family" required></label>
+          <div class="field-row paar">
+            <label>Start date<input name="begin_datum" type="date" required></label>
+            <label>Start time<input name="begin_uur" type="time" value="20:00" required></label>
+          </div>
+          <div class="field-row paar">
+            <label>End date<input name="eind_datum" type="date" required></label>
+            <label>End time<input name="eind_uur" type="time" required></label>
+          </div>
+          <p class="form-note">We suggest six hours later. You can move the end, up to at most 24 hours after the start.</p>
+          <p class="form-note" id="koopDuur" aria-live="polite"></p>
+          <div class="field-row">
+            <label>Email address<input name="email" type="email" autocomplete="email" maxlength="200" required></label>
+            <label>Email address (again)<input name="email2" type="email" autocomplete="email" maxlength="200" required></label>
+          </div>
+          <p class="form-note">Your link and your invoice are sent to this address.</p>
+          <h3>For the invoice</h3>
+          <div class="field-row">
+            <label>First name<input name="voornaam" type="text" autocomplete="given-name" maxlength="60" required></label>
+            <label>Last name<input name="familienaam" type="text" autocomplete="family-name" maxlength="60" required></label>
+          </div>
+          <label>Street and number<input name="straat" type="text" autocomplete="street-address" maxlength="150" required></label>
+          <div class="field-row">
+            <label>Postcode<input name="postcode" type="text" autocomplete="postal-code" maxlength="10" required></label>
+            <label>Town<input name="gemeente" type="text" autocomplete="address-level2" maxlength="80" required></label>
+          </div>
+          <label>Country
+            <select name="land" autocomplete="country">
+              <option value="BE">Belgium</option>
+              <option value="NL">Netherlands</option>
+              <option value="DE">Germany</option>
+              <option value="LU">Luxembourg</option>
+              <option value="FR">France</option>
+            </select>
+          </label>
+          <label class="vink"><input name="akkoord" type="checkbox" required><span>I am 18 or older, I agree to the <a href="terms.html" target="_blank" rel="noopener">terms</a> and I have read the <a href="privacy.html" target="_blank" rel="noopener">privacy statement</a>.</span></label>
+          <p class="herroep" id="herroep"><strong>No right of withdrawal.</strong> You are buying a service for a fixed date. So you cannot withdraw from the purchase within 14 days, and you don't get your money back if you cancel or the party doesn't take place. If it can't take place because of a mistake on our side, you do get your money back.</p>
+          <label class="vink"><input name="geen_herroeping" type="checkbox" aria-describedby="herroep" required><span>I understand that I have no right of withdrawal.</span></label>
+          <label class="hp" aria-hidden="true">Leave this empty<input name="website" type="text" tabindex="-1" autocomplete="off"></label>
+          <button class="button koop" type="submit"><span>Order and pay: € <span data-prijs>4.95</span></span><small>No right of withdrawal, no money back</small></button>
+          <p class="form-status" role="status" aria-live="polite"></p>
+          <!-- Before sales open: add the seller's full address and enterprise number. -->
+          <p class="form-note">Price: € <span data-prijs>4.95</span>, no VAT (special exemption scheme for small businesses). Seller: Matthias Schils, trading as Making Memories, Lanaken, Belgium, <a href="mailto:info@makingmemories.be">info@makingmemories.be</a>.</p>
         </form>
       </div>
     </section>
@@ -180,5 +252,6 @@
   </footer>
 </div>
 <script src="../feestformulier.js"></script>
+<script src="../feestkoop.js"></script>
 </body>
 </html>

@@ -246,3 +246,27 @@ section[id]{scroll-margin-top:.5rem}
 #aanvragen .field-row{align-items:end}
 #aanvragen input,#aanvragen select{min-width:0;height:3rem}
 #aanvragen .hp input{height:auto}
+
+/* Feest kopen */
+[hidden]{display:none!important}
+.keuze-tekst{color:var(--muted);font-size:1rem;margin:0}
+.button.licht{background:#fff;color:var(--forest-deep);box-shadow:inset 0 0 0 2px var(--forest)}
+.button.licht:hover{background:var(--forest);color:#fff}
+#kopen .request{margin-top:1.5rem}
+#kopen .request h3{margin:.5rem 0 0}
+#kopen .field-row{align-items:end}
+#kopen .paar{grid-template-columns:3fr 2fr}
+#kopen input:not([type=checkbox]),#kopen select{min-width:0;height:3rem}
+#kopen .hp input{height:auto}
+.request label.vink{display:grid;grid-template-columns:1.3rem 1fr;gap:.7rem;font-weight:400}
+.request label.vink input{width:1.3rem;height:1.3rem;margin:.2rem 0 0;padding:0;accent-color:var(--forest)}
+.herroep{border-left:4px solid var(--pin);max-width:none;background:#fff;padding:.8rem 1rem;border-radius:.4rem;font-size:1rem;margin:0}
+.request .button.koop{justify-self:stretch;text-align:center;line-height:1.35}
+.button.koop small{display:block;font-weight:400;font-size:.9rem}
+.form-note.let-op{color:#b3261e;font-weight:600}
+#koopDuur:empty{display:none}
+.bedankt-kop{font-size:clamp(2rem,5vw,2.8rem);line-height:1.1;margin:0 0 1.5rem}
+.bedankt{max-width:var(--measure);margin-top:0}
+.bedankt h2{font-size:1.35rem;margin:0 0 .5rem}
+.bedankt p{margin:0 0 .5rem}
+button.button{border:0;cursor:pointer;font-family:inherit}
