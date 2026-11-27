@@ -153,6 +153,7 @@
     prijs=engels?prijs:prijs.replace('.',',');
     Array.prototype.forEach.call(document.querySelectorAll('[data-prijs]'),function(e){e.textContent=prijs;});
     Array.prototype.forEach.call(document.querySelectorAll('[data-gasten]'),function(e){e.textContent=a.gasten;});
+    if(a.open_dagen!=null)Array.prototype.forEach.call(document.querySelectorAll('[data-dagen]'),function(e){e.textContent=a.open_dagen;});
     if(a.vanaf){
       var nu=new Date(), vandaag=nu.getFullYear()+'-'+('0'+(nu.getMonth()+1)).slice(-2)+'-'+('0'+nu.getDate()).slice(-2);
       form.begin_datum.min=form.eind_datum.min=a.vanaf>vandaag?a.vanaf:vandaag;
